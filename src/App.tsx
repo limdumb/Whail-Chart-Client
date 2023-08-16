@@ -10,6 +10,7 @@ import YoutubeMVChart from "./Platform/Youtube/YoutubeMVCahrt";
 import YoutubeMusicChart from "./Platform/Youtube/YoutubeMusicChart";
 import styled from "styled-components";
 import Header from "./Common/Header/Header";
+import AsideBar from "./Common/AsideBar/AsideBar";
 
 const BodyContainer = styled.div`
   height: 100%;
@@ -21,17 +22,21 @@ function App() {
   return (
     <BrowserRouter>
       <BodyContainer>
-        <Header/>
-        <Routes>
-          <Route element={<MainChart />} path="/" />
-          <Route element={<MelonChart />} path="/melon/chart" />
-          <Route element={<BugsChart />} path="/bugs/chart" />
-          <Route element={<FloChart />} path="/flo/chart" />
-          <Route element={<GenieChart />} path="/genie/chart" />
-          <Route element={<VibeChart />} path="/vibe/chart" />
-          <Route element={<YoutubeMVChart />} path="/yotubue/chart/mv" />
-          <Route element={<YoutubeMusicChart />} path="/youtube/chart/music" />
-        </Routes>
+        <Header />
+          <AsideBar />
+          <Routes>
+            <Route element={<MainChart />} path="/" />
+            <Route element={<MelonChart />} path="/melon/chart" />
+            <Route element={<BugsChart />} path="/bugs/chart" />
+            <Route element={<FloChart />} path="/flo/chart" />
+            <Route element={<GenieChart />} path="/genie/chart" />
+            <Route element={<VibeChart />} path="/vibe/chart" />
+            <Route element={<YoutubeMVChart />} path="/yotubue/chart/mv" />
+            <Route
+              element={<YoutubeMusicChart />}
+              path="/youtube/chart/music"
+            />
+          </Routes>
       </BodyContainer>
     </BrowserRouter>
   );
