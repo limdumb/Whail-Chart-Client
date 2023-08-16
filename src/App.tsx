@@ -9,6 +9,7 @@ import VibeChart from "./Platform/Vibe/VibeChart";
 import YoutubeMVChart from "./Platform/Youtube/YoutubeMVCahrt";
 import YoutubeMusicChart from "./Platform/Youtube/YoutubeMusicChart";
 import styled from "styled-components";
+import Header from "./Common/Header/Header";
 
 const BodyContainer = styled.div`
   height: 100%;
@@ -20,6 +21,7 @@ function App() {
   return (
     <BrowserRouter>
       <BodyContainer>
+        <Header/>
         <Routes>
           <Route element={<MainChart />} path="/" />
           <Route element={<MelonChart />} path="/melon/chart" />
