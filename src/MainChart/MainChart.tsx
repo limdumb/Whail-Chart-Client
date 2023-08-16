@@ -1,4 +1,3 @@
-export default function MainChart(){
-
+export default function MainChart() {
   return(<></>)
 }
