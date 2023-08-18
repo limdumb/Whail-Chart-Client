@@ -1,0 +1,19 @@
+.Box_Wrapper {
+  width: 100%;
+  height: 51px;
+  padding: 12px 30px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Icon_Image {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.Pletform_Name{
+  font-size: 16px;
+  font-weight: 400;
+  color:  rgb(129, 129, 129);
+}

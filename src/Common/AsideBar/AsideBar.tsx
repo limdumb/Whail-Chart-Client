@@ -1,4 +1,6 @@
 import { styled } from "styled-components";
+import AsideTabBox from "./TabBox";
+import { pleftformValue } from "../../Function/pletformValue";
 
 const AsideBarWrapper = styled.aside`
   width: 260px;
@@ -10,5 +12,13 @@ const AsideBarWrapper = styled.aside`
 `;
 
 export default function AsideBar(): JSX.Element {
-  return <AsideBarWrapper></AsideBarWrapper>;
+  const pleftformArray = pleftformValue();
+
+  return (
+    <AsideBarWrapper>
+      {pleftformArray.map((el) => {
+        return <AsideTabBox key={el.name} pletform={el.name} />;
+      })}
+    </AsideBarWrapper>
+  );
 }
