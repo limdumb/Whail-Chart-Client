@@ -1,0 +1,4 @@
+.All_Chart_Box_Conateinr {
+  display: flex;
+  flex-direction: column;
+}
