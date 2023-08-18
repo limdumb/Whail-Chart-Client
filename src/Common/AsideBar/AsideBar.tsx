@@ -15,6 +15,8 @@ const AsideBarWrapper = styled.aside`
   font-size: 16px;
   font-weight: 400;
   color: rgb(129, 129, 129);
+  position: fixed;
+  margin-top: 81px;
 `;
 
 const LableWrapper = styled.div`
