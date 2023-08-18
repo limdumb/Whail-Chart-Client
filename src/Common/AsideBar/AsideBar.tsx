@@ -29,10 +29,10 @@ const LableWrapper = styled.div`
 const ContoureLineWrapper = styled.div`
   margin-top: 10px;
   margin-bottom: 30px;
-  padding-left: 20px;
+  padding-left: 30px;
   display: flex;
   justify-content: flex-end;
-`
+`;
 
 export default function AsideBar(): JSX.Element {
   const pleftformArray = pleftformValue();
