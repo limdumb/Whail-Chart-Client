@@ -2,6 +2,8 @@ import { styled } from "styled-components";
 import AsideTabBox from "./TabBox";
 import { pleftformValue } from "../../Function/pletformValue";
 import AllChartBox from "./AllChartBox";
+import "./css/asidebar.css";
+import ContoureLine from "../ContourLine";
 
 const AsideBarWrapper = styled.aside`
   width: 260px;
@@ -12,18 +14,52 @@ const AsideBarWrapper = styled.aside`
   padding-top: 30px;
   font-size: 16px;
   font-weight: 400;
-  color:  rgb(129, 129, 129);
+  color: rgb(129, 129, 129);
 `;
+
+const LableWrapper = styled.div`
+  padding: 0 30px;
+  margin-bottom: 5px;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  font-weight: 500;
+  height: 25px;
+`;
+
+const ContoureLineWrapper = styled.div`
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding-left: 20px;
+  display: flex;
+  justify-content: flex-end;
+`
 
 export default function AsideBar(): JSX.Element {
   const pleftformArray = pleftformValue();
 
   return (
     <AsideBarWrapper>
-      <AllChartBox/>
-      {pleftformArray.map((el) => {
-        return <AsideTabBox key={el.name} pletform={el.name} />;
-      })}
+      <div className="All_Chart_Box_Conateinr">
+        <LableWrapper>
+          <span>All Chart</span>
+        </LableWrapper>
+        <AllChartBox />
+      </div>
+      <ContoureLineWrapper>
+        <ContoureLine
+          color={"rgb(124, 135, 152)"}
+          thickness={1}
+          opacity={0.1}
+        />
+      </ContoureLineWrapper>
+      <div>
+        <LableWrapper>
+          <span>CHARTS</span>
+        </LableWrapper>
+        {pleftformArray.map((el) => {
+          return <AsideTabBox key={el.name} pletform={el.name} />;
+        })}
+      </div>
     </AsideBarWrapper>
   );
 }

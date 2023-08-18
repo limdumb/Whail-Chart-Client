@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { pletformIcon } from "../../Function/pletformIcon";
-import "./tabBox.css";
+import "./css/tabBox.css";
 
 interface AsideTabBoxProps {
   pletform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
