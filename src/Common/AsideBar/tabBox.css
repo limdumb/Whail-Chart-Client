@@ -4,6 +4,7 @@
   padding: 12px 30px;
   display: flex;
   justify-content: flex-start;
+  cursor: pointer;
 }
 
 .Icon_Image {
