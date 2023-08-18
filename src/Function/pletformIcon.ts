@@ -1,5 +1,5 @@
 interface PletformIconProps {
-  pletform: string;
+  pletform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe"
 }
 
 export const pletformIcon = (props: PletformIconProps) => {
