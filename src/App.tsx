@@ -18,6 +18,7 @@ const BodyContainer = styled.div`
 export const PageLayoutContainer = styled.div`
   margin-left: 260px;
   margin-top: 81px;
+  padding: 35px;
 `
 
 function App() {
