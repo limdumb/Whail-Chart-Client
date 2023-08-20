@@ -39,6 +39,7 @@ const ChartCardWrapper = styled.div`
 `;
 
 export default function ChartCard(props: ChartDataType) {
+  
   return (
     <ChartCardWrapper>
       <CustomSpan
