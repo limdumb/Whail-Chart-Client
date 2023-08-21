@@ -1,27 +1,27 @@
 import { styled } from "styled-components";
 import { CustomSpan } from "../CustomSpan";
 
-interface SongDataType {
-  rank: number;
-  previous: number;
-  likes: string;
-  song: {
-    id: number;
-    name: string;
-    album: {
-      id: number;
-      name: string;
-      image: string;
-    };
-    artists: [
-      {
-        id: number;
-        name: string;
-        image: string;
-      }
-    ];
-  };
-}
+// interface SongDataType {
+//   rank: number;
+//   previous: number;
+//   likes: string;
+//   song: {
+//     id: number;
+//     name: string;
+//     album: {
+//       id: number;
+//       name: string;
+//       image: string;
+//     };
+//     artists: [
+//       {
+//         id: number;
+//         name: string;
+//         image: string;
+//       }
+//     ];
+//   };
+// }
 
 interface ChartDataType {
   pletform: string;
@@ -39,7 +39,7 @@ const ChartCardWrapper = styled.div`
 `;
 
 export default function ChartCard(props: ChartDataType) {
-  
+
   return (
     <ChartCardWrapper>
       <CustomSpan
