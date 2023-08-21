@@ -1,9 +1,10 @@
 import { LuLineChart } from "react-icons/lu";
 import { styled } from "styled-components";
 import ChartTitle from "./ChartTitle";
-import "./css/chartCard.css";
 import { CustomSpan } from "../CustomSpan";
 import ContoureLine from "../ContourLine";
+import "./css/chartCard.css";
+import RankCard from "./RankCard";
 
 interface SongDataType {
   rank: number;
@@ -70,7 +71,18 @@ export default function ChartCard(props: ChartDataType) {
           />
         </div>
       </div>
-      {/* <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} /> */}
+      <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} />
+      <div>
+        <RankCard
+          rank={10}
+          image={
+            "https://i.namu.wiki/i/MtcAn7yyzd-InAcywYTcAIW-ey2OhRpfYVxSi1xFyxm6LE2OYK5GE0b98kG_86yldmlQrlWGPUfzdBid-HDyZw.webp"
+          }
+          song={"Super Shy"}
+          artist={"NEWJEANS"}
+          previous={2}
+        />
+      </div>
     </ChartCardWrapper>
   );
 }
