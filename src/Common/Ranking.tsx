@@ -20,6 +20,7 @@ const ChangeRankWrapper = styled.div`
   align-items: center;
   height: 20px;
   margin-top: 5px;
+  margin-left: 2px;
 `;
 
 const ChangeRank = (changeRank: number) => {

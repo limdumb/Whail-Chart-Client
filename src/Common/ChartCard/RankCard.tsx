@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import Ranking from "../Ranking";
 import CustomImage from "../CustomImage";
+import { CustomSpan } from "../CustomSpan";
 
 interface RankCardType {
   rank: number;
@@ -22,6 +23,21 @@ const ImageWrapper = styled.div`
   padding: 5px;
 `;
 
+const ArtistWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  width: 100%;
+  padding: 0 5px 3px 5px;
+  justify-content: space-around;
+  
+`;
+
+const SongContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 export default function RankCard(props: RankCardType) {
   return (
     <RankBox>
@@ -31,7 +47,24 @@ export default function RankCard(props: RankCardType) {
       <ImageWrapper>
         <CustomImage image={props.image} width={48} height={48} />
       </ImageWrapper>
-      <div></div>
+      <ArtistWrapper>
+        <SongContainer>
+          <CustomSpan
+            children={props.song}
+            fontSize={14}
+            color="#3d3d3d"
+            fontWeight={600}
+          />
+        </SongContainer>
+        <div>
+          <CustomSpan
+            children={props.artist}
+            color="#646464"
+            fontSize={14}
+            fontWeight={400}
+          />
+        </div>
+      </ArtistWrapper>
     </RankBox>
   );
 }

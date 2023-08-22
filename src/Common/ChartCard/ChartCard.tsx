@@ -35,7 +35,7 @@ interface ChartDataType {
 }
 
 const ChartCardWrapper = styled.div`
-  width: 285px;
+  width: 300px;
   height: 900px;
   background-color: white;
   box-shadow: 0.1px 0.1px 1px 1px rgba(124, 135, 152, 0.2);
@@ -80,7 +80,7 @@ export default function ChartCard(props: ChartDataType) {
           }
           song={"Super Shy"}
           artist={"NEWJEANS"}
-          previous={2}
+          previous={10}
         />
       </div>
     </ChartCardWrapper>
