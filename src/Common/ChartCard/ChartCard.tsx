@@ -73,15 +73,6 @@ export default function ChartCard(props: ChartDataType) {
       </div>
       <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} />
       <div>
-        <RankCard
-          rank={10}
-          image={
-            "https://i.namu.wiki/i/MtcAn7yyzd-InAcywYTcAIW-ey2OhRpfYVxSi1xFyxm6LE2OYK5GE0b98kG_86yldmlQrlWGPUfzdBid-HDyZw.webp"
-          }
-          song={"Super Shy"}
-          artist={"NEWJEANS"}
-          previous={10}
-        />
       </div>
     </ChartCardWrapper>
   );
