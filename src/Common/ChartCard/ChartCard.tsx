@@ -3,10 +3,10 @@ import { styled } from "styled-components";
 import ChartTitle from "./ChartTitle";
 import { CustomSpan } from "../CustomSpan";
 import ContoureLine from "../ContourLine";
-import "./css/chartCard.css";
 import RankCard from "./RankCard";
 import { PageButton } from "../PageButton";
 import { useEffect, useState } from "react";
+import "./css/chartCard.css";
 
 export interface SongDataType {
   rank: number;
@@ -23,12 +23,13 @@ export interface SongDataType {
     };
   };
 }
+
 interface ChartCardProps {
   pletform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
   updateTime: string;
   searchValue: string;
   chart: SongDataType[];
-  pages: number;
+  // pages: number;
   handlePrevClick: () => void;
   handleNextClick: () => void;
   pageEndIndex: number;
@@ -85,6 +86,7 @@ export default function ChartCard(props: ChartCardProps) {
         .map((_, i) => i + 1)
         .slice(props.pageStartIndex, props.pageEndIndex + 1)
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.pageStartIndex, props.pageEndIndex]);
 
   const handleClick = (index: number) => {
