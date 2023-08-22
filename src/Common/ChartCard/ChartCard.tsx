@@ -5,6 +5,8 @@ import { CustomSpan } from "../CustomSpan";
 import ContoureLine from "../ContourLine";
 import "./css/chartCard.css";
 import RankCard from "./RankCard";
+import { PageButton } from "../PageButton";
+import { useEffect, useState } from "react";
 
 export interface SongDataType {
   rank: number;
@@ -26,7 +28,11 @@ interface ChartCardProps {
   updateTime: string;
   searchValue: string;
   chart: SongDataType[];
-  pages: number
+  pages: number;
+  handlePrevClick: () => void;
+  handleNextClick: () => void;
+  pageEndIndex: number;
+  pageStartIndex: number;
 }
 
 const ChartCardWrapper = styled.div`
@@ -43,23 +49,59 @@ const RankingChartWrapper = styled.div`
   min-height: 600px;
   background-color: pink;
   margin-bottom: 6px;
-`
+`;
 
 const CountWrapper = styled.div`
-height: 37px;
+  height: 37px;
   padding-top: 13px;
   justify-content: center;
   align-items: center;
   background-color: black;
-`
+`;
 
 const PageNationWrapper = styled.div`
   height: 42px;
   margin-top: 5px;
-  background-color: pink;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MoveButton = styled.button`
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #5f76e8;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+`;
 
 export default function ChartCard(props: ChartCardProps) {
+  const [pageActiveIndex, setPageActiveIndex] = useState(0);
+  const [pageButton, setPageButton] = useState<Array<number>>(
+    Array(10)
+      .fill(0)
+      .map((_, i) => i)
+      .slice(0, 4)
+  );
+  // const numPage = Math.ceil(props.chart.length / 10);
+  useEffect(() => {
+    setPageButton(
+      Array(10)
+        .fill(0)
+        .map((_, i) => i + 1)
+        .slice(props.pageStartIndex, props.pageEndIndex + 1)
+    );
+  }, [props.pageStartIndex, props.pageEndIndex]);
+
+  const handleClick = (index: number) => {
+    setPageActiveIndex(index);
+  };
+
+  console.log(pageButton);
+
   return (
     <ChartCardWrapper>
       <div className="Chart_Title_Wrapper">
@@ -100,11 +142,33 @@ export default function ChartCard(props: ChartCardProps) {
           );
         })}
       </RankingChartWrapper>
-      <CountWrapper>
-
-      </CountWrapper>
+      <CountWrapper></CountWrapper>
       <PageNationWrapper>
-
+        <MoveButton
+          children="<<"
+          onClick={() => {
+            if (pageButton[0] !== 1) props.handlePrevClick();
+          }}
+        />
+        {pageButton.map((el, index) => {
+          return (
+            <PageButton
+              key={el}
+              pages={el}
+              active={index === pageActiveIndex}
+              onClick={() => handleClick(index)}
+            />
+          );
+        })}
+        <MoveButton
+          children=">>"
+          onClick={() => {
+            if (
+              pageButton[props.pageEndIndex] !== pageButton[pageButton.length]
+            )
+              props.handleNextClick();
+          }}
+        />
       </PageNationWrapper>
     </ChartCardWrapper>
   );
