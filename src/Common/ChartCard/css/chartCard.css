@@ -1,0 +1,29 @@
+.Chart_Title_Wrapper {
+  margin-bottom: 12px;
+}
+
+.Search_Input_Wrapper {
+  height: 39px;
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.Chart_Top_Wrapper{
+  height: 59px;
+  padding: 16px;
+}
+
+.Chart_Top_Wrapper{
+  display: flex;
+}
+
+.Icon_Wrapper{
+  display: flex;
+  align-items: center;
+}
+
+.Title_Wrapper{
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
