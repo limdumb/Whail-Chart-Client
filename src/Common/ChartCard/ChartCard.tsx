@@ -1,9 +1,10 @@
 import { LuLineChart } from "react-icons/lu";
 import { styled } from "styled-components";
 import ChartTitle from "./ChartTitle";
-import "./css/chartCard.css";
 import { CustomSpan } from "../CustomSpan";
 import ContoureLine from "../ContourLine";
+import "./css/chartCard.css";
+import RankCard from "./RankCard";
 
 interface SongDataType {
   rank: number;
@@ -34,7 +35,7 @@ interface ChartDataType {
 }
 
 const ChartCardWrapper = styled.div`
-  width: 285px;
+  width: 300px;
   height: 900px;
   background-color: white;
   box-shadow: 0.1px 0.1px 1px 1px rgba(124, 135, 152, 0.2);
@@ -70,7 +71,9 @@ export default function ChartCard(props: ChartDataType) {
           />
         </div>
       </div>
-      {/* <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} /> */}
+      <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} />
+      <div>
+      </div>
     </ChartCardWrapper>
   );
 }
