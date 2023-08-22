@@ -6,32 +6,27 @@ import ContoureLine from "../ContourLine";
 import "./css/chartCard.css";
 import RankCard from "./RankCard";
 
-interface SongDataType {
+export interface SongDataType {
   rank: number;
   previous: number;
   likes: string;
   song: {
     id: number;
     name: string;
-    album: {
+    image: string;
+    artists: {
       id: number;
       name: string;
       image: string;
     };
-    artists: [
-      {
-        id: number;
-        name: string;
-        image: string;
-      }
-    ];
   };
 }
-interface ChartDataType {
+interface ChartCardProps {
   pletform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
   updateTime: string;
   searchValue: string;
   chart: SongDataType[];
+  pages: number
 }
 
 const ChartCardWrapper = styled.div`
@@ -44,7 +39,27 @@ const ChartCardWrapper = styled.div`
   padding: 25px;
 `;
 
-export default function ChartCard(props: ChartDataType) {
+const RankingChartWrapper = styled.div`
+  min-height: 600px;
+  background-color: pink;
+  margin-bottom: 6px;
+`
+
+const CountWrapper = styled.div`
+height: 37px;
+  padding-top: 13px;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+`
+
+const PageNationWrapper = styled.div`
+  height: 42px;
+  margin-top: 5px;
+  background-color: pink;
+`
+
+export default function ChartCard(props: ChartCardProps) {
   return (
     <ChartCardWrapper>
       <div className="Chart_Title_Wrapper">
@@ -72,8 +87,25 @@ export default function ChartCard(props: ChartDataType) {
         </div>
       </div>
       <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} />
-      <div>
-      </div>
+      <RankingChartWrapper>
+        {props.chart.map((el) => {
+          return (
+            <RankCard
+              rank={el.rank}
+              image={el.song.image}
+              song={el.song.name}
+              artist={el.song.artists.name}
+              previous={el.previous}
+            />
+          );
+        })}
+      </RankingChartWrapper>
+      <CountWrapper>
+
+      </CountWrapper>
+      <PageNationWrapper>
+
+      </PageNationWrapper>
     </ChartCardWrapper>
   );
 }
