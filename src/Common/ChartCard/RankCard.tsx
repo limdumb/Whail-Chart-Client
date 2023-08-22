@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import Ranking from "../Ranking";
 import CustomImage from "../CustomImage";
 import { CustomSpan } from "../CustomSpan";
+import { limitStrChange } from "../../Function/limitStrChange";
 
 interface RankCardType {
   rank: number;
@@ -30,15 +31,19 @@ const ArtistWrapper = styled.div`
   width: 100%;
   padding: 0 5px 3px 5px;
   justify-content: space-around;
-  
 `;
 
 const SongContainer = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 
 export default function RankCard(props: RankCardType) {
+  const rankInfo = {
+    song: limitStrChange(props.song, 9),
+    artist: limitStrChange(props.artist, 9),
+  };
+
   return (
     <RankBox>
       <div>
@@ -50,7 +55,7 @@ export default function RankCard(props: RankCardType) {
       <ArtistWrapper>
         <SongContainer>
           <CustomSpan
-            children={props.song}
+            children={rankInfo.song}
             fontSize={14}
             color="#3d3d3d"
             fontWeight={600}
@@ -58,7 +63,7 @@ export default function RankCard(props: RankCardType) {
         </SongContainer>
         <div>
           <CustomSpan
-            children={props.artist}
+            children={rankInfo.artist}
             color="#646464"
             fontSize={14}
             fontWeight={400}
