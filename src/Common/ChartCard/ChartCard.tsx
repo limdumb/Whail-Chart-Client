@@ -37,7 +37,7 @@ interface ChartCardProps {
 
 const ChartCardWrapper = styled.div`
   width: 300px;
-  height: 900px;
+  height: 850px;
   background-color: white;
   box-shadow: 0.1px 0.1px 1px 1px rgba(124, 135, 152, 0.2);
   display: flex;
@@ -46,17 +46,8 @@ const ChartCardWrapper = styled.div`
 `;
 
 const RankingChartWrapper = styled.div`
-  min-height: 600px;
-  background-color: pink;
+  height: 100%;
   margin-bottom: 6px;
-`;
-
-const CountWrapper = styled.div`
-  height: 37px;
-  padding-top: 13px;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
 `;
 
 const PageNationWrapper = styled.div`
@@ -79,17 +70,17 @@ const MoveButton = styled.button`
 `;
 
 export default function ChartCard(props: ChartCardProps) {
+  const numPage = Math.ceil(props.chart.length / 10);
   const [pageActiveIndex, setPageActiveIndex] = useState(0);
   const [pageButton, setPageButton] = useState<Array<number>>(
-    Array(10)
+    Array(numPage)
       .fill(0)
       .map((_, i) => i)
       .slice(0, 4)
   );
-  // const numPage = Math.ceil(props.chart.length / 10);
   useEffect(() => {
     setPageButton(
-      Array(10)
+      Array(numPage)
         .fill(0)
         .map((_, i) => i + 1)
         .slice(props.pageStartIndex, props.pageEndIndex + 1)
@@ -142,7 +133,6 @@ export default function ChartCard(props: ChartCardProps) {
           );
         })}
       </RankingChartWrapper>
-      <CountWrapper></CountWrapper>
       <PageNationWrapper>
         <MoveButton
           children="<<"
