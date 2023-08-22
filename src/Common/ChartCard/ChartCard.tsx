@@ -29,7 +29,6 @@ interface ChartCardProps {
   updateTime: string;
   searchValue: string;
   chart: SongDataType[];
-  // pages: number;
   handlePrevClick: () => void;
   handleNextClick: () => void;
   pageEndIndex: number;

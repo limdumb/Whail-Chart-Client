@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { PageLayoutContainer } from "../App";
 import ChartCard from "../Common/ChartCard/ChartCard";
+import { useQuery } from "react-query";
+import { getChartData } from "../API/getChartData";
 
 export default function MainChart() {
-  // const [pages, setPages] = useState<number>(1);
+  const { isLoading, error, data, status } = useQuery("chartData", async () => {
+    const data = await getChartData();
+    return data.data;
+  });
   const itemsPerPage = 5;
   const [pageStartIndex, setPageStartIndex] = useState(0);
   const [pageEndIndex, setPageEndIndex] = useState(itemsPerPage - 1);
@@ -16,6 +21,10 @@ export default function MainChart() {
     setPageStartIndex(pageStartIndex - itemsPerPage);
     setPageEndIndex(pageEndIndex - itemsPerPage);
   };
+
+  if (isLoading) return <span>로딩</span>;
+  if (error) return <span>에러</span>;
+
   return (
     <PageLayoutContainer>
       <ChartCard
