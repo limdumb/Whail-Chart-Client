@@ -3,8 +3,10 @@ import { baseInstance } from "./instance";
 import { SongDataType } from "../Common/ChartCard/ChartCard";
 
 interface ChartDataResponse {
-  pletform: string;
+  platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
   chart: SongDataType[];
+  date: string
+  hour: number
 }
 
 export const getChartData = async () => {
