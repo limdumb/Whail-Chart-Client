@@ -32,7 +32,6 @@ export default function MainChart() {
         pageEndIndex={pageEndIndex}
         handleNextClick={handleNextClick}
         handlePrevClick={handlePrevClick}
-        // pages={pages}
         pletform={"Melon"}
         updateTime={"2023-08-21 18시"}
         searchValue={""}
