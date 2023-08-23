@@ -92,8 +92,6 @@ export default function ChartCard(props: ChartCardProps) {
     setPageActiveIndex(index);
   };
 
-  console.log(pageButton);
-
   return (
     <ChartCardWrapper>
       <div className="Chart_Title_Wrapper">
