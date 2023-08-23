@@ -29,7 +29,6 @@ interface ChartCardProps {
   updateTime: string;
   searchValue: string;
   chart: SongDataType[];
-  // pages: number;
   handlePrevClick: () => void;
   handleNextClick: () => void;
   pageEndIndex: number;
@@ -92,8 +91,6 @@ export default function ChartCard(props: ChartCardProps) {
   const handleClick = (index: number) => {
     setPageActiveIndex(index);
   };
-
-  console.log(pageButton);
 
   return (
     <ChartCardWrapper>
