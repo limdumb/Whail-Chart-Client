@@ -14,6 +14,7 @@ export default function MainChart() {
   const changedDate = changeDate(data?.date, data?.hour);
   const [pageStartIndex, setPageStartIndex] = useState(0);
   const [pageEndIndex, setPageEndIndex] = useState(itemsPerPage - 1);
+
   const handleNextClick = () => {
     setPageStartIndex(pageEndIndex + 1);
     setPageEndIndex(pageEndIndex + itemsPerPage);
