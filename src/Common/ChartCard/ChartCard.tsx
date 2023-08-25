@@ -46,6 +46,12 @@ const ChartCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 25px;
+
+  @media screen and (max-width: 390px){
+    width: 100%;
+    box-shadow: none;
+    padding: 0px;
+  }
 `;
 
 const RankingChartWrapper = styled.div`
@@ -73,14 +79,14 @@ const MoveButton = styled.button`
 `;
 
 export default function ChartCard(props: ChartCardProps) {
-  const query = useQuery({
-    queryKey: ["chartData"],
-    queryFn: async () => {
-      const data = await getChartData();
-      return data.data;
-    },
-  });
-  const changedDate = changeDate(query.data?.date, query.data?.hour);
+  // const query = useQuery({
+  //   queryKey: ["chartData"],
+  //   queryFn: async () => {
+  //     const data = await getChartData();
+  //     return data.data;
+  //   },
+  // });
+  // const changedDate = changeDate(query.data?.date, query.data?.hour);
   const [pageActiveIndex, setPageActiveIndex] = useState(0);
   const [pageButton, setPageButton] = useState<Array<number>>(
     Array(props.numPage)
@@ -90,9 +96,9 @@ export default function ChartCard(props: ChartCardProps) {
   );
 
   useEffect(() => {
-    if (query.data) {
-      props.setNumPage(() => Math.ceil(query.data.chart.length / 10));
-    }
+    // if (query.data) {
+    //   props.setNumPage(() => Math.ceil(query.data.chart.length / 10));
+    // }
     setPageButton(
       Array(props.numPage)
         .fill(0)
@@ -103,7 +109,7 @@ export default function ChartCard(props: ChartCardProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.pageStartIndex, props.pageEndIndex, props.numPage]);
 
-  if (query.error) return <></>;
+  // if (query.error) return <></>;
   const handleClick = (index: number) => {
     setPageActiveIndex(index);
   };
@@ -115,7 +121,8 @@ export default function ChartCard(props: ChartCardProps) {
       </div>
       <div className="Search_Input_Wrapper">
         <CustomSpan
-          children={changedDate}
+        children=""
+          // children={changedDate}
           fontSize={16}
           color={"rgb(158, 171, 192)"}
         />
@@ -136,7 +143,14 @@ export default function ChartCard(props: ChartCardProps) {
       </div>
       <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} />
       <RankingChartWrapper>
-        {query.data &&
+      <RankCard
+                rank={1}
+                image={""}
+                song={"ㅎㅇ"}
+                artist={"누진스"}
+                previous={1}
+              />
+        {/* {query.data &&
           query.data.chart.map((el) => {
             return (
               <RankCard
@@ -147,7 +161,7 @@ export default function ChartCard(props: ChartCardProps) {
                 previous={el.previous}
               />
             );
-          })}
+          })} */}
       </RankingChartWrapper>
       <PageNationWrapper>
         <MoveButton

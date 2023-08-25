@@ -13,6 +13,9 @@ const BodyContainer = styled.div`
   height: 100%;
   background-color: #f9fbfd;
   min-height: 100vh;
+  @media screen and (max-width: 390px){
+    background-color: white;
+  }
 `;
 
 export const PageLayoutContainer = styled.div`
@@ -20,6 +23,15 @@ export const PageLayoutContainer = styled.div`
   margin-top: 81px;
   padding: 35px;
   display: flex;
+  @media screen and (max-width: 390px) {
+    width: 390px;
+    height: 100%;
+    margin: 0px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 81px;
+  }
 `
 
 function App() {

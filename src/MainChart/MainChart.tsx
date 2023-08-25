@@ -24,7 +24,7 @@ export default function MainChart() {
     <PageLayoutContainer>
       {pletformArr.map((el, index) => {
         return (
-          <div key={index}>
+          <div className="Main_Chart_Wrapper" key={index}>
             <ChartCard
               numPage={numPage}
               setNumPage={setNumPage}
