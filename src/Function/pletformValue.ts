@@ -2,7 +2,7 @@ interface PletformValueType {
   name: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
 }
 
-export const pleftformValue = () => {
+export const pletformValue = () => {
   const value: PletformValueType[] = [
     { name: "Melon" },
     { name: "Genie" },

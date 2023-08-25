@@ -3,7 +3,7 @@ import { baseInstance } from "./instance";
 import { SongDataType } from "../Common/ChartCard/ChartCard";
 
 interface ChartDataResponse {
-  platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
+  pletform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
   chart: SongDataType[];
   date: string
   hour: number

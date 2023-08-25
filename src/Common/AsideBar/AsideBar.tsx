@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
 import AsideTabBox from "./TabBox";
-import { pleftformValue } from "../../Function/pletformValue";
+import { pletformValue } from "../../Function/pletformValue";
 import AllChartBox from "./AllChartBox";
-import "./css/asidebar.css";
 import ContoureLine from "../ContourLine";
+import "./css/asidebar.css";
 
 const AsideBarWrapper = styled.aside`
   width: 260px;
@@ -37,7 +37,7 @@ const ContoureLineWrapper = styled.div`
 `;
 
 export default function AsideBar(): JSX.Element {
-  const pleftformArray = pleftformValue();
+  const pleftformArray = pletformValue();
 
   return (
     <AsideBarWrapper>
