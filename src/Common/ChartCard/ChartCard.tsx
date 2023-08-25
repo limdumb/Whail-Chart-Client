@@ -7,6 +7,9 @@ import RankCard from "./RankCard";
 import { PageButton } from "../PageButton";
 import { useEffect, useState } from "react";
 import "./css/chartCard.css";
+import { useQuery } from "react-query";
+import { getChartData } from "../../API/getChartData";
+import { changeDate } from "../../Function/changeDate";
 
 export interface SongDataType {
   rank: number;
@@ -26,9 +29,9 @@ export interface SongDataType {
 
 interface ChartCardProps {
   pletform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
-  updateTime: string;
   searchValue: string;
-  chart: SongDataType[];
+  numPage: number;
+  setNumPage: React.Dispatch<React.SetStateAction<number>>;
   handlePrevClick: () => void;
   handleNextClick: () => void;
   pageEndIndex: number;
@@ -70,24 +73,37 @@ const MoveButton = styled.button`
 `;
 
 export default function ChartCard(props: ChartCardProps) {
-  const numPage = Math.ceil(props.chart.length / 10);
+  const query = useQuery({
+    queryKey: ["chartData"],
+    queryFn: async () => {
+      const data = await getChartData();
+      return data.data;
+    },
+  });
+  const changedDate = changeDate(query.data?.date, query.data?.hour);
   const [pageActiveIndex, setPageActiveIndex] = useState(0);
   const [pageButton, setPageButton] = useState<Array<number>>(
-    Array(numPage)
+    Array(props.numPage)
       .fill(0)
       .map((_, i) => i)
       .slice(0, 4)
   );
+
   useEffect(() => {
+    if (query.data) {
+      props.setNumPage(() => Math.ceil(query.data.chart.length / 10));
+    }
     setPageButton(
-      Array(numPage)
+      Array(props.numPage)
         .fill(0)
         .map((_, i) => i + 1)
         .slice(props.pageStartIndex, props.pageEndIndex + 1)
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.pageStartIndex, props.pageEndIndex]);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.pageStartIndex, props.pageEndIndex, props.numPage]);
+
+  if (query.error) return <></>;
   const handleClick = (index: number) => {
     setPageActiveIndex(index);
   };
@@ -99,7 +115,7 @@ export default function ChartCard(props: ChartCardProps) {
       </div>
       <div className="Search_Input_Wrapper">
         <CustomSpan
-          children={props.updateTime}
+          children={changedDate}
           fontSize={16}
           color={"rgb(158, 171, 192)"}
         />
@@ -120,17 +136,18 @@ export default function ChartCard(props: ChartCardProps) {
       </div>
       <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} />
       <RankingChartWrapper>
-        {props.chart.map((el) => {
-          return (
-            <RankCard
-              rank={el.rank}
-              image={el.song.image}
-              song={el.song.name}
-              artist={el.song.artists.name}
-              previous={el.previous}
-            />
-          );
-        })}
+        {query.data &&
+          query.data.chart.map((el) => {
+            return (
+              <RankCard
+                rank={el.rank}
+                image={el.song.image}
+                song={el.song.name}
+                artist={el.song.artists.name}
+                previous={el.previous}
+              />
+            );
+          })}
       </RankingChartWrapper>
       <PageNationWrapper>
         <MoveButton
