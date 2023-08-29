@@ -28,7 +28,7 @@ export interface SongDataType {
 }
 
 interface ChartCardProps {
-  pletform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
+  platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
   searchValue: string;
   numPage: number;
   setNumPage: React.Dispatch<React.SetStateAction<number>>;
@@ -50,7 +50,7 @@ const ChartCardWrapper = styled.div`
   @media screen and (max-width: 390px) {
     width: 100%;
     box-shadow: none;
-    padding: 0px;
+    margin-bottom: 30px;
   }
 `;
 
@@ -79,13 +79,22 @@ const MoveButton = styled.button`
 `;
 
 export default function ChartCard(props: ChartCardProps) {
+  const [platform, setPlatform] = useState(props.platform.toLowerCase());
+
+  useEffect(() => {
+    setPlatform(props.platform.toLowerCase());
+  }, [props.platform]);
+
   const query = useQuery({
-    queryKey: ["chartData"],
+    queryKey: ["chartData", platform],
     queryFn: async () => {
-      const data = await getChartData();
+      const data = await getChartData({
+        platform: platform,
+      });
       return data.data;
     },
   });
+
   const changedDate = changeDate(query.data?.date, query.data?.hour);
   const [pageActiveIndex, setPageActiveIndex] = useState(0);
   const [pageButton, setPageButton] = useState<Array<number>>(
@@ -117,7 +126,7 @@ export default function ChartCard(props: ChartCardProps) {
   return (
     <ChartCardWrapper>
       <div className="Chart_Title_Wrapper">
-        <ChartTitle pletform={props.pletform} />
+        <ChartTitle pletform={props.platform} />
       </div>
       <div className="Search_Input_Wrapper">
         <CustomSpan
@@ -146,6 +155,7 @@ export default function ChartCard(props: ChartCardProps) {
           query.data.chart.map((el) => {
             return (
               <RankCard
+                key={el.song.id}
                 rank={el.rank}
                 image={el.song.image}
                 song={el.song.name}

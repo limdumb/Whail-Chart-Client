@@ -13,8 +13,8 @@ const BodyContainer = styled.div`
   height: 100%;
   background-color: #f9fbfd;
   min-height: 100vh;
-  @media screen and (max-width: 390px){
-    background-color: white;
+  @media screen and (max-width: 390px) {
+    /* background-color: white; */
   }
 `;
 
@@ -27,12 +27,12 @@ export const PageLayoutContainer = styled.div`
     width: 390px;
     height: 100%;
     margin: 0px;
-    padding: 25px;
+    padding: 0px;
     display: flex;
     flex-direction: column;
     margin-top: 81px;
   }
-`
+`;
 
 function App() {
   return (

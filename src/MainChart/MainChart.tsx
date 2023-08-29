@@ -32,10 +32,8 @@ export default function MainChart() {
               pageEndIndex={pageEndIndex}
               handleNextClick={handleNextClick}
               handlePrevClick={handlePrevClick}
-              pletform={el.name}
-              // updateTime={changedDate}
+              platform={el.name}
               searchValue={""}
-              // chart={data.chart}
             />
           </div>
         );
