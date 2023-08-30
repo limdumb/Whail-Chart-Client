@@ -13,14 +13,39 @@ const BodyContainer = styled.div`
   height: 100%;
   background-color: #f9fbfd;
   min-height: 100vh;
+  @media screen and (max-width: 390px) {
+  }
 `;
 
 export const PageLayoutContainer = styled.div`
   margin-left: 260px;
   margin-top: 81px;
-  padding: 35px;
   display: flex;
-`
+  flex-direction: column;
+  padding: 35px;
+  width: 100%;
+  height: 100%;
+  @media screen and (max-width: 390px) {
+    width: 390px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 81px;
+    .Chart_Container {
+      display: flex;
+      flex-direction: column;
+    }
+    .Last_Chart_Container {
+      display: flex;
+      flex-direction: column;
+    }
+    .Chart_Intro_Container{
+      margin-top: 15px;
+    }
+  }
+`;
 
 function App() {
   return (

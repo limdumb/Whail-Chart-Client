@@ -28,7 +28,7 @@ export interface SongDataType {
 }
 
 interface ChartCardProps {
-  pletform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
+  platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
   searchValue: string;
   numPage: number;
   setNumPage: React.Dispatch<React.SetStateAction<number>>;
@@ -39,13 +39,19 @@ interface ChartCardProps {
 }
 
 const ChartCardWrapper = styled.div`
-  width: 300px;
+  width: 330px;
   height: 850px;
   background-color: white;
   box-shadow: 0.1px 0.1px 1px 1px rgba(124, 135, 152, 0.2);
   display: flex;
   flex-direction: column;
   padding: 25px;
+
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    box-shadow: none;
+    margin-bottom: 30px;
+  }
 `;
 
 const RankingChartWrapper = styled.div`
@@ -73,13 +79,22 @@ const MoveButton = styled.button`
 `;
 
 export default function ChartCard(props: ChartCardProps) {
+  const [platform, setPlatform] = useState(props.platform.toLowerCase());
+
+  useEffect(() => {
+    setPlatform(props.platform.toLowerCase());
+  }, [props.platform]);
+
   const query = useQuery({
-    queryKey: ["chartData"],
+    queryKey: ["chartData", platform],
     queryFn: async () => {
-      const data = await getChartData();
-      return data.data;
+      const data = await getChartData({
+        platform: platform,
+      });
+      return data;
     },
   });
+
   const changedDate = changeDate(query.data?.date, query.data?.hour);
   const [pageActiveIndex, setPageActiveIndex] = useState(0);
   const [pageButton, setPageButton] = useState<Array<number>>(
@@ -111,7 +126,7 @@ export default function ChartCard(props: ChartCardProps) {
   return (
     <ChartCardWrapper>
       <div className="Chart_Title_Wrapper">
-        <ChartTitle pletform={props.pletform} />
+        <ChartTitle pletform={props.platform} />
       </div>
       <div className="Search_Input_Wrapper">
         <CustomSpan
@@ -140,6 +155,7 @@ export default function ChartCard(props: ChartCardProps) {
           query.data.chart.map((el) => {
             return (
               <RankCard
+                key={el.song.id}
                 rank={el.rank}
                 image={el.song.image}
                 song={el.song.name}

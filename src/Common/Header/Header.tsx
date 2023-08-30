@@ -13,7 +13,8 @@ const HeaderWrapper = styled.div`
   @media screen and (max-width: 390px) {
     width: 390px;
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    background-color: white;
   };
 `;
 

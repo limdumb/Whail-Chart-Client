@@ -17,6 +17,10 @@ const AsideBarWrapper = styled.aside`
   color: rgb(129, 129, 129);
   position: fixed;
   margin-top: 81px;
+
+  @media screen and (max-width: 390px) {
+display: none;
+  }
 `;
 
 const LableWrapper = styled.div`
