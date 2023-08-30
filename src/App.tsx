@@ -14,7 +14,6 @@ const BodyContainer = styled.div`
   background-color: #f9fbfd;
   min-height: 100vh;
   @media screen and (max-width: 390px) {
-    /* background-color: white; */
   }
 `;
 
@@ -34,6 +33,17 @@ export const PageLayoutContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 81px;
+    .Chart_Container {
+      display: flex;
+      flex-direction: column;
+    }
+    .Last_Chart_Container {
+      display: flex;
+      flex-direction: column;
+    }
+    .Chart_Intro_Container{
+      margin-top: 15px;
+    }
   }
 `;
 

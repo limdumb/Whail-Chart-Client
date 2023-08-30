@@ -45,7 +45,7 @@ export default function MainChart() {
           />
           <CustomSpan
             children="차트가 업데이트 되면 자동으로 차트를 불러옵니다."
-            fontSize={14}
+            fontSize={13}
             color="#9eabc0"
           />
         </div>
