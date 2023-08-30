@@ -14,8 +14,14 @@ interface Props {
 }
 
 export const getChartData = async (props: Props) => {
-    const response: AxiosResponse<ChartDataResponse> = await baseInstance.get(
-      `/songs/${props.platform}`
-    );
-    return response;
+    // const response: AxiosResponse<ChartDataResponse> = await baseInstance.get(
+    //   `/songs/${props.platform}`
+    // );
+    const test:ChartDataResponse = {
+      platform: "Melon",
+      chart: [],
+      date: "",
+      hour: 0
+    }
+    return test;
 };

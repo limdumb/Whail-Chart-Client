@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PageLayoutContainer } from "../App";
 import ChartCard from "../Common/ChartCard/ChartCard";
 import { pletformValue } from "../Function/pletformValue";
+import "./css/mainChart.css";
 
 export default function MainChart() {
   const pletformArr = pletformValue();
@@ -22,22 +23,24 @@ export default function MainChart() {
 
   return (
     <PageLayoutContainer>
-      {pletformArr.map((el, index) => {
-        return (
-          <div className="Main_Chart_Wrapper" key={index}>
-            <ChartCard
-              numPage={numPage}
-              setNumPage={setNumPage}
-              pageStartIndex={pageStartIndex}
-              pageEndIndex={pageEndIndex}
-              handleNextClick={handleNextClick}
-              handlePrevClick={handlePrevClick}
-              platform={el.name}
-              searchValue={""}
-            />
-          </div>
-        );
-      })}
+      <div className="Chart_Container">
+        {pletformArr.map((el, index) => {
+          return (
+            <div className="Main_Chart_Wrapper" key={index}>
+              <ChartCard
+                numPage={numPage}
+                setNumPage={setNumPage}
+                pageStartIndex={pageStartIndex}
+                pageEndIndex={pageEndIndex}
+                handleNextClick={handleNextClick}
+                handlePrevClick={handlePrevClick}
+                platform={el.name}
+                searchValue={""}
+              />
+            </div>
+          );
+        })}
+      </div>
     </PageLayoutContainer>
   );
 }

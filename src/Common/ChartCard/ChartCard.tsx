@@ -91,7 +91,7 @@ export default function ChartCard(props: ChartCardProps) {
       const data = await getChartData({
         platform: platform,
       });
-      return data.data;
+      return data;
     },
   });
 
