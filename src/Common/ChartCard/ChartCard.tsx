@@ -39,7 +39,7 @@ interface ChartCardProps {
 }
 
 const ChartCardWrapper = styled.div`
-  width: 300px;
+  width: 330px;
   height: 850px;
   background-color: white;
   box-shadow: 0.1px 0.1px 1px 1px rgba(124, 135, 152, 0.2);
