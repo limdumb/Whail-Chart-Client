@@ -22,7 +22,7 @@ export const PageLayoutContainer = styled.div`
   margin-top: 81px;
   display: flex;
   flex-direction: column;
-  padding: 35px;
+  padding: 25px;
   width: 100%;
   height: 100%;
   @media screen and (max-width: 390px) {

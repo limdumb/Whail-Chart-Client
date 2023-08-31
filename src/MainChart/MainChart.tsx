@@ -3,7 +3,7 @@ import { PageLayoutContainer } from "../App";
 import ChartCard from "../Common/ChartCard/ChartCard";
 import { pletformValue } from "../Function/pletformValue";
 import "./css/mainChart.css";
-import { CustomSpan } from "../Common/CustomSpan";
+import ChartTitle from "../Common/ChartTitle";
 
 export default function MainChart() {
   const firstPletformArr = pletformValue().slice(0, 3);
@@ -25,31 +25,7 @@ export default function MainChart() {
 
   return (
     <PageLayoutContainer>
-      <div className="Chart_Intro_Container">
-        <div className="Title_Container">
-          <CustomSpan children="Chart" fontSize={21} fontWeight={500} />
-        </div>
-        <div>
-          <CustomSpan
-            children="All In One"
-            fontSize={14}
-            fontWeight={500}
-            color="#7c8798"
-            marginright={8}
-          />
-          <CustomSpan
-            children="/"
-            fontSize={12}
-            color="#ced4da"
-            marginright={8}
-          />
-          <CustomSpan
-            children="차트가 업데이트 되면 자동으로 차트를 불러옵니다."
-            fontSize={13}
-            color="#9eabc0"
-          />
-        </div>
-      </div>
+      <ChartTitle chartType={"realTime"} />
       <div className="Chart_Container">
         {firstPletformArr.map((el, index) => {
           return (
