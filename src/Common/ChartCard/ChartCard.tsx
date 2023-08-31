@@ -36,11 +36,12 @@ interface ChartCardProps {
   handleNextClick: () => void;
   pageEndIndex: number;
   pageStartIndex: number;
+  chartType: "daily" | "realTime"
 }
 
 const ChartCardWrapper = styled.div`
-  width: 330px;
-  height: 850px;
+  width: 100%;
+  height: 100%;
   background-color: white;
   box-shadow: 0.1px 0.1px 1px 1px rgba(124, 135, 152, 0.2);
   display: flex;

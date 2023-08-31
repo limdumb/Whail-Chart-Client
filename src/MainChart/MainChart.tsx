@@ -63,6 +63,7 @@ export default function MainChart() {
                 handlePrevClick={handlePrevClick}
                 platform={el.name}
                 searchValue={""}
+                chartType={"realTime"}
               />
             </div>
           );
@@ -81,6 +82,7 @@ export default function MainChart() {
                 handlePrevClick={handlePrevClick}
                 platform={el.name}
                 searchValue={""}
+                chartType={"realTime"}
               />
             </div>
           );
