@@ -16,7 +16,7 @@ export default function ChartTitle(props: ChartTitleType) {
         />
       ) : (
         <CustomSpan
-          children={`${props.pletform} 일간차트`}
+          children={`${props.pletform} 일간 차트`}
           fontSize={18}
           fontWeight={500}
         />
