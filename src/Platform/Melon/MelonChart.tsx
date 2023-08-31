@@ -11,11 +11,25 @@ const MelonLayoutContainer = styled.div`
   padding: 35px;
   width: 100%;
   height: 100%;
+  @media screen and (max-width: 390px) {
+    width: 390px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 81px;
+  }
+`;
+
+const ChartWrapper = styled.div`
+  @media screen and (max-width: 390px) {
+    padding: 0px 15px;
+    margin-top: 15px;
+  }
 `;
 
 export default function MelonChart() {
-  const firstPletformArr = pletformValue().slice(0, 3);
-  const lastPetformArr = pletformValue().slice(3);
   const itemsPerPage = 5;
   const [pageStartIndex, setPageStartIndex] = useState(0);
   const [pageEndIndex, setPageEndIndex] = useState(itemsPerPage - 1);
@@ -33,19 +47,19 @@ export default function MelonChart() {
 
   return (
     <MelonLayoutContainer>
-      <div>
-      <ChartCard
-        platform={"Melon"}
-        searchValue={""}
-        numPage={numPage}
-        setNumPage={setNumPage}
-        handlePrevClick={handlePrevClick}
-        handleNextClick={handleNextClick}
-        pageEndIndex={pageEndIndex}
-        pageStartIndex={pageStartIndex}
-        chartType={"daily"}
-      />
-      </div>
+      <ChartWrapper>
+        <ChartCard
+          platform={"Melon"}
+          searchValue={""}
+          numPage={numPage}
+          setNumPage={setNumPage}
+          handlePrevClick={handlePrevClick}
+          handleNextClick={handleNextClick}
+          pageEndIndex={pageEndIndex}
+          pageStartIndex={pageStartIndex}
+          chartType={"daily"}
+        />
+      </ChartWrapper>
     </MelonLayoutContainer>
   );
 }

@@ -10,6 +10,7 @@ interface ChartDataResponse {
 }
 
 interface Props {
+  chartType: "daily" | "realTime"
   platform: string;
 }
 

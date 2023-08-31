@@ -36,7 +36,7 @@ interface ChartCardProps {
   handleNextClick: () => void;
   pageEndIndex: number;
   pageStartIndex: number;
-  chartType: "daily" | "realTime"
+  chartType: "daily" | "realTime";
 }
 
 const ChartCardWrapper = styled.div`
@@ -49,7 +49,6 @@ const ChartCardWrapper = styled.div`
   padding: 25px;
 
   @media screen and (max-width: 390px) {
-    width: 100%;
     box-shadow: none;
     margin-bottom: 30px;
   }
@@ -91,6 +90,7 @@ export default function ChartCard(props: ChartCardProps) {
     queryFn: async () => {
       const data = await getChartData({
         platform: platform,
+        chartType: props.chartType,
       });
       return data;
     },
@@ -127,7 +127,7 @@ export default function ChartCard(props: ChartCardProps) {
   return (
     <ChartCardWrapper>
       <div className="Chart_Title_Wrapper">
-        <ChartTitle pletform={props.platform} />
+        <ChartTitle chartType={props.chartType} pletform={props.platform} />
       </div>
       <div className="Search_Input_Wrapper">
         <CustomSpan

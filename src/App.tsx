@@ -44,6 +44,10 @@ export const PageLayoutContainer = styled.div`
     .Chart_Intro_Container{
       margin-top: 15px;
     }
+    .Main_Chart_Wrapper{
+      width: 100%;
+      height: 100%;
+    }
   }
 `;
 

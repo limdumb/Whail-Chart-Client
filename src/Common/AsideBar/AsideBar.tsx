@@ -51,7 +51,7 @@ export default function AsideBar(): JSX.Element {
         <LableWrapper>
           <span>All Chart</span>
         </LableWrapper>
-        <AllChartBox />
+        <AllChartBox navigate={navigate} />
       </div>
       <ContoureLineWrapper>
         <ContoureLine
