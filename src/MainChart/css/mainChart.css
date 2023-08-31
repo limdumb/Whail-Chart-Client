@@ -1,5 +1,7 @@
 .Main_Chart_Wrapper {
   padding: 0px 15px;
+  width: 330px;
+  height: 850px;
 }
 
 .Chart_Container {

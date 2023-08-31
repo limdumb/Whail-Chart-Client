@@ -4,6 +4,7 @@ import { pletformValue } from "../../Function/pletformValue";
 import AllChartBox from "./AllChartBox";
 import ContoureLine from "../ContourLine";
 import "./css/asidebar.css";
+import { useNavigate } from "react-router-dom";
 
 const AsideBarWrapper = styled.aside`
   width: 260px;
@@ -19,7 +20,7 @@ const AsideBarWrapper = styled.aside`
   margin-top: 81px;
 
   @media screen and (max-width: 390px) {
-display: none;
+    display: none;
   }
 `;
 
@@ -42,6 +43,7 @@ const ContoureLineWrapper = styled.div`
 
 export default function AsideBar(): JSX.Element {
   const pleftformArray = pletformValue();
+  const navigate = useNavigate();
 
   return (
     <AsideBarWrapper>
@@ -49,7 +51,7 @@ export default function AsideBar(): JSX.Element {
         <LableWrapper>
           <span>All Chart</span>
         </LableWrapper>
-        <AllChartBox />
+        <AllChartBox navigate={navigate} />
       </div>
       <ContoureLineWrapper>
         <ContoureLine
@@ -63,7 +65,9 @@ export default function AsideBar(): JSX.Element {
           <span>CHARTS</span>
         </LableWrapper>
         {pleftformArray.map((el) => {
-          return <AsideTabBox key={el.name} pletform={el.name} />;
+          return (
+            <AsideTabBox navigate={navigate} key={el.name} pletform={el.name} />
+          );
         })}
       </div>
     </AsideBarWrapper>
