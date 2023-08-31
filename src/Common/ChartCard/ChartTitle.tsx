@@ -1,3 +1,4 @@
+import "./css/chartTitle.css"
 import { CustomSpan } from "../CustomSpan";
 
 interface ChartTitleType {

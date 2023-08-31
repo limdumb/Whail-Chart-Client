@@ -1,0 +1,17 @@
+.Chart_Intro_Container {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 15px;
+  margin-bottom: 35px;
+}
+
+.Title_Container {
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width:390px) {
+  .Chart_Intro_Container{
+    margin-top: 15px;
+    margin-bottom: 25px;
+  }
+}
