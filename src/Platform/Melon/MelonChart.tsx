@@ -1,14 +1,14 @@
 import { styled } from "styled-components";
 import ChartCard from "../../Common/ChartCard/ChartCard";
-import { SetStateAction, useState } from "react";
-import { pletformValue } from "../../Function/pletformValue";
+import { useState } from "react";
+import ChartTitle from "../../Common/ChartTitle";
 
 const MelonLayoutContainer = styled.div`
   margin-left: 260px;
   margin-top: 81px;
   display: flex;
   flex-direction: column;
-  padding: 35px;
+  padding: 25px;
   width: 100%;
   height: 100%;
   @media screen and (max-width: 390px) {
@@ -23,8 +23,8 @@ const MelonLayoutContainer = styled.div`
 `;
 
 const ChartWrapper = styled.div`
+  padding: 0px 15px;
   @media screen and (max-width: 390px) {
-    padding: 0px 15px;
     margin-top: 15px;
   }
 `;
@@ -47,6 +47,7 @@ export default function MelonChart() {
 
   return (
     <MelonLayoutContainer>
+      <ChartTitle chartType="daily" platform={"Melon"} date="2022-11-30" />
       <ChartWrapper>
         <ChartCard
           platform={"Melon"}
