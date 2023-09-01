@@ -97,6 +97,7 @@ export default function ChartCard(props: ChartCardProps) {
   });
 
   const changedDate = changeDate(query.data?.date, query.data?.hour);
+
   const [pageActiveIndex, setPageActiveIndex] = useState(0);
   const [pageButton, setPageButton] = useState<Array<number>>(
     Array(props.numPage)
@@ -109,15 +110,23 @@ export default function ChartCard(props: ChartCardProps) {
     if (query.data) {
       props.setNumPage(() => Math.ceil(query.data.chart.length / 10));
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.pageStartIndex, props.pageEndIndex, props.numPage]);
+
+  useEffect(() => {
     setPageButton(
       Array(props.numPage)
         .fill(0)
         .map((_, i) => i + 1)
         .slice(props.pageStartIndex, props.pageEndIndex + 1)
     );
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.pageStartIndex, props.pageEndIndex, props.numPage]);
+  }, [
+    props.pageStartIndex,
+    props.pageEndIndex,
+    props.numPage,
+    query.isFetched,
+  ]);
 
   if (query.error) return <></>;
   const handleClick = (index: number) => {
