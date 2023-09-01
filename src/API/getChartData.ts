@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { baseInstance } from "./instance";
 import { SongDataType } from "../Common/ChartCard/ChartCard";
+import dummydata from "./dummydata";
 
 interface ChartDataResponse {
   platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
@@ -10,22 +11,17 @@ interface ChartDataResponse {
 }
 
 interface Props {
-  chartType: "daily" | "realTime"
+  chartType: "daily" | "realTime";
   platform: string;
 }
 
 export const getChartData = async (props: Props) => {
-    // const response: AxiosResponse<ChartDataResponse> = await baseInstance.get(
-    //   `/songs/${props.platform}`
-    // );
+  // const response: AxiosResponse<ChartDataResponse> = await baseInstance.get(
+  //   `/songs/${props.platform}`
+  // );
 
-    const test:ChartDataResponse = {
-      platform: "Melon",
-      chart: [],
-      date: "",
-      hour: 0
-    }
-    return test;
+  const test: ChartDataResponse = dummydata()
+  return test;
 
-    // return response.data
+  // return response.data
 };

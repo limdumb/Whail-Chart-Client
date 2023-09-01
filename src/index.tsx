@@ -12,9 +12,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <QueryClientProvider client={queryClient}>
-    <React.StrictMode>
       <App />
-    </React.StrictMode>
   </QueryClientProvider>
 );
 
