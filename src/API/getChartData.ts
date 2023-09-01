@@ -18,6 +18,7 @@ export const getChartData = async (props: Props) => {
     // const response: AxiosResponse<ChartDataResponse> = await baseInstance.get(
     //   `/songs/${props.platform}`
     // );
+
     const test:ChartDataResponse = {
       platform: "Melon",
       chart: [],
@@ -25,4 +26,6 @@ export const getChartData = async (props: Props) => {
       hour: 0
     }
     return test;
+
+    // return response.data
 };
