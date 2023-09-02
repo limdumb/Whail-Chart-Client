@@ -6,11 +6,11 @@ import ContoureLine from "../ContourLine";
 import RankCard from "./RankCard";
 import { PageButton } from "../PageButton";
 import { useEffect, useState } from "react";
-import "./css/chartCard.css";
 import { useQuery } from "react-query";
 import { getChartData } from "../../API/getChartData";
 import { changeDate } from "../../Function/changeDate";
 import { itemPerPage } from "../../Function/itemPerPage";
+import "./css/chartCard.css";
 
 export interface SongDataType {
   rank: number;
