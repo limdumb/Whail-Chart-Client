@@ -10,6 +10,7 @@ import "./css/chartCard.css";
 import { useQuery } from "react-query";
 import { getChartData } from "../../API/getChartData";
 import { changeDate } from "../../Function/changeDate";
+import { itemPerPage } from "../../Function/itemPerPage";
 
 export interface SongDataType {
   rank: number;
@@ -79,6 +80,7 @@ const MoveButton = styled.button`
 `;
 
 export default function ChartCard(props: ChartCardProps) {
+  const itemsPerPageValue = itemPerPage();
   const [platform, setPlatform] = useState(props.platform.toLowerCase());
 
   useEffect(() => {
@@ -96,39 +98,28 @@ export default function ChartCard(props: ChartCardProps) {
     },
   });
 
+  const [pageActiveIndex, setPageActiveIndex] = useState(0);
+  const startIndex = pageActiveIndex * itemsPerPageValue;
+  const endIndex = startIndex + itemsPerPageValue;
+  const currentData =
+    query.data && query.data.chart.slice(startIndex, endIndex);
+  console.log(pageActiveIndex);
+
   const changedDate = changeDate(query.data?.date, query.data?.hour);
 
-  const [pageActiveIndex, setPageActiveIndex] = useState(0);
-  const [pageButton, setPageButton] = useState<Array<number>>(
-    Array(props.numPage)
-      .fill(0)
-      .map((_, i) => i)
-      .slice(0, 4)
-  );
+  const pageButton = Array(props.numPage)
+    .fill(0)
+    .map((_, i) => i + 1)
+    .slice(props.pageStartIndex, props.pageEndIndex + 1);
 
   useEffect(() => {
-    if (query.data) {
-      props.setNumPage(() => Math.ceil(query.data.chart.length / 10));
+    if (query.isFetched && query.data) {
+      props.setNumPage(Math.ceil(query.data.chart.length / 10));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.pageStartIndex, props.pageEndIndex, props.numPage]);
+  }, [props.pageStartIndex, props.pageEndIndex, query.isFetched]);
 
-  useEffect(() => {
-    setPageButton(
-      Array(props.numPage)
-        .fill(0)
-        .map((_, i) => i + 1)
-        .slice(props.pageStartIndex, props.pageEndIndex + 1)
-    );
-  }, [
-    props.pageStartIndex,
-    props.pageEndIndex,
-    props.numPage,
-    query.isFetched,
-  ]);
-
-  if (query.error) return <></>;
   const handleClick = (index: number) => {
     setPageActiveIndex(index);
   };
@@ -161,11 +152,11 @@ export default function ChartCard(props: ChartCardProps) {
       </div>
       <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} />
       <RankingChartWrapper>
-        {query.data &&
-          query.data.chart.map((el) => {
+        {currentData &&
+          currentData.map((el, index) => {
             return (
               <RankCard
-                key={el.song.id}
+                key={index}
                 rank={el.rank}
                 image={el.song.image}
                 song={el.song.name}
@@ -187,8 +178,8 @@ export default function ChartCard(props: ChartCardProps) {
             <PageButton
               key={el}
               pages={el}
-              active={index === pageActiveIndex}
-              onClick={() => handleClick(index)}
+              active={el - 1 === pageActiveIndex}
+              onClick={() => handleClick(el - 1)}
             />
           );
         })}

@@ -30,19 +30,19 @@ const ChartWrapper = styled.div`
 `;
 
 export default function BugsChart() {
-  const itemsPerPage = 5;
+  const buttonPerPage = 5;
   const [pageStartIndex, setPageStartIndex] = useState(0);
-  const [pageEndIndex, setPageEndIndex] = useState(itemsPerPage - 1);
+  const [pageEndIndex, setPageEndIndex] = useState(buttonPerPage - 1);
   const [numPage, setNumPage] = useState(0);
 
   const handlePrevClick = () => {
-    setPageStartIndex(pageStartIndex - itemsPerPage);
-    setPageEndIndex(pageEndIndex - itemsPerPage);
+    setPageStartIndex(pageStartIndex - buttonPerPage);
+    setPageEndIndex(pageEndIndex - buttonPerPage);
   };
 
   const handleNextClick = () => {
     setPageStartIndex(pageEndIndex + 1);
-    setPageEndIndex(pageEndIndex + itemsPerPage);
+    setPageEndIndex(pageEndIndex + buttonPerPage);
   };
 
   return (
