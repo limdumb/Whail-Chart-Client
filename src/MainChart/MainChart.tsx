@@ -2,8 +2,8 @@ import { useState } from "react";
 import { PageLayoutContainer } from "../App";
 import ChartCard from "../Common/ChartCard/ChartCard";
 import { pletformValue } from "../Function/pletformValue";
-import "./css/mainChart.css";
 import ChartTitle from "../Common/ChartTitle";
+import "./css/mainChart.css";
 
 export default function MainChart() {
   const firstPletformArr = pletformValue().slice(0, 3);
