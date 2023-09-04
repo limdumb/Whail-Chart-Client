@@ -51,6 +51,7 @@ export default function GenieChart() {
       <ChartTitle chartType="daily" platform={"Genie"} date="2022-11-30" />
       <ChartWrapper>
         <ChartCard
+          used="page"
           platform={"Genie"}
           searchValue={""}
           numPage={numPage}

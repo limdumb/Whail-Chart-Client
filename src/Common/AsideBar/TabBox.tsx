@@ -2,9 +2,9 @@ import { styled } from "styled-components";
 import { pletformIcon } from "../../Function/pletformIcon";
 import "./css/tabBox.css";
 import { NavigateFunction } from "react-router-dom";
-import { PletformValueType } from "../../Function/pletformValue";
+import { PlatformValueType } from "../../Function/pletformValue";
 
-interface AsideTabBoxProps extends PletformValueType {
+interface AsideTabBoxProps extends PlatformValueType {
   navigate: NavigateFunction;
 }
 

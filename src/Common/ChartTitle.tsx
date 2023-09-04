@@ -2,8 +2,8 @@ import { CustomSpan } from "./CustomSpan";
 
 interface ChartTitleProps {
   chartType: "daily" | "realTime";
-  platform?: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
   date?: string;
+  platform: string;
 }
 
 export default function ChartTitle(props: ChartTitleProps) {

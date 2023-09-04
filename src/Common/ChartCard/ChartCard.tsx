@@ -11,7 +11,7 @@ import { getChartData } from "../../API/getChartData";
 import { changeDate } from "../../Function/changeDate";
 import { itemPerPage } from "../../Function/itemPerPage";
 import "./css/chartCard.css";
-import { PletformValueType } from "../../Function/pletformValue";
+import { PlatformValueType } from "../../Function/pletformValue";
 
 export interface SongDataType {
   rank: number;
@@ -29,7 +29,7 @@ export interface SongDataType {
   };
 }
 
-interface ChartCardProps extends PletformValueType {
+interface ChartCardProps extends PlatformValueType {
   searchValue: string;
   numPage: number;
   setNumPage: React.Dispatch<React.SetStateAction<number>>;
@@ -38,6 +38,7 @@ interface ChartCardProps extends PletformValueType {
   pageEndIndex: number;
   pageStartIndex: number;
   chartType: "daily" | "realTime";
+  used: "all" | "page";
 }
 
 const ChartCardWrapper = styled.div`
@@ -155,6 +156,7 @@ export default function ChartCard(props: ChartCardProps) {
           currentData.map((el, index) => {
             return (
               <RankCard
+                used={props.used}
                 key={index}
                 rank={el.rank}
                 image={el.song.image}

@@ -1,6 +1,6 @@
-import { PletformValueType } from "./pletformValue";
+import { PlatformValueType } from "./pletformValue";
 
-export const pletformIcon = (props: PletformValueType) => {
+export const pletformIcon = (props: PlatformValueType) => {
   switch (props.platform) {
     case "Melon100":
       return "https://xn--o39an51b2re.com/static/images/ico/melon.png?v=2";

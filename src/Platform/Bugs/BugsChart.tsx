@@ -50,6 +50,7 @@ export default function BugsChart() {
       <ChartTitle chartType="daily" platform={"Bugs"} date="2022-11-30" />
       <ChartWrapper>
         <ChartCard
+          used="page"
           platform={"Bugs"}
           searchValue={""}
           numPage={numPage}

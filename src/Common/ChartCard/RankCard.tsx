@@ -10,6 +10,7 @@ interface RankCardType {
   song: string;
   artist: string;
   previous: number;
+  used: "all" | "page";
 }
 
 const RankBox = styled.div`
@@ -40,8 +41,9 @@ const SongContainer = styled.div`
 
 export default function RankCard(props: RankCardType) {
   const rankInfo = {
-    song: limitStrChange(props.song, 9),
-    artist: limitStrChange(props.artist, 9),
+    song: props.used === "all" ? limitStrChange(props.song, 9) : props.song,
+    artist:
+      props.used === "all" ? limitStrChange(props.artist, 9) : props.artist,
   };
 
   return (
