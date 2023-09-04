@@ -1,9 +1,9 @@
-interface PletformIconProps {
-  pletform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe"
-}
+import { PletformValueType } from "./pletformValue";
 
-export const pletformIcon = (props: PletformIconProps) => {
-  switch (props.pletform) {
+export const pletformIcon = (props: PletformValueType) => {
+  switch (props.platform) {
+    case "Melon24":
+      return "https://xn--o39an51b2re.com/static/images/ico/melon.png?v=2";
     case "Melon":
       return "https://xn--o39an51b2re.com/static/images/ico/melon.png?v=2";
     case "Bugs":

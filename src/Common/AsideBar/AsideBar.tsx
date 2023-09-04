@@ -66,7 +66,11 @@ export default function AsideBar(): JSX.Element {
         </LableWrapper>
         {pleftformArray.map((el) => {
           return (
-            <AsideTabBox navigate={navigate} key={el.name} pletform={el.name} />
+            <AsideTabBox
+              navigate={navigate}
+              key={el.platform}
+              platform={el.platform}
+            />
           );
         })}
       </div>
