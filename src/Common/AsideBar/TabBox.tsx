@@ -20,7 +20,7 @@ export const AsideTabWrapper = styled.div`
 export default function AsideTabBox(props: AsideTabBoxProps) {
   const tabIcon = pletformIcon({ platform: props.platform });
   const platformValue =
-    props.platform !== "Melon24" ? props.platform : "Melon 24Hits";
+    props.platform !== "Melon100" ? props.platform : "Melon Hot 100";
   return (
     <AsideTabWrapper
       onClick={() => {

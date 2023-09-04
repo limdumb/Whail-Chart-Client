@@ -103,7 +103,6 @@ export default function ChartCard(props: ChartCardProps) {
   const endIndex = startIndex + itemsPerPageValue;
   const currentData =
     query.data && query.data.chart.slice(startIndex, endIndex);
-  console.log(pageActiveIndex);
 
   const changedDate = changeDate(query.data?.date, query.data?.hour);
 
