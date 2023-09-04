@@ -50,6 +50,7 @@ export default function FloChart() {
       <ChartTitle chartType="daily" platform={"Flo"} date="2022-11-30" />
       <ChartWrapper>
         <ChartCard
+          used="page"
           platform={"Flo"}
           searchValue={""}
           numPage={numPage}

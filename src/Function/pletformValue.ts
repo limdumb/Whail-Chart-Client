@@ -1,9 +1,9 @@
-export interface PletformValueType {
+export interface PlatformValueType {
   platform: "Melon100" | "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
 }
 
 export const pletformValue = () => {
-  const value: PletformValueType[] = [
+  const value: PlatformValueType[] = [
     { platform: "Melon100" },
     { platform: "Melon" },
     { platform: "Genie" },

@@ -50,6 +50,7 @@ export default function VibeChart() {
       <ChartTitle chartType="daily" platform={"Vibe"} date="2022-11-30" />
       <ChartWrapper>
         <ChartCard
+          used="page"
           platform={"Vibe"}
           searchValue={""}
           numPage={numPage}

@@ -1,4 +1,3 @@
-import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MelonChart from "./Platform/Melon/MelonChart";
 import MainChart from "./MainChart/MainChart";
@@ -8,6 +7,8 @@ import GenieChart from "./Platform/Genie/GenieChart";
 import VibeChart from "./Platform/Vibe/VibeChart";
 import styled from "styled-components";
 import MainLayout from "./Common/MainLayout";
+import MelonHot100Chart from "./Platform/Melon/MelonHot100";
+import "./App.css";
 
 const BodyContainer = styled.div`
   height: 100%;
@@ -41,10 +42,10 @@ export const PageLayoutContainer = styled.div`
       display: flex;
       flex-direction: column;
     }
-    .Chart_Intro_Container{
+    .Chart_Intro_Container {
       margin-top: 15px;
     }
-    .Main_Chart_Wrapper{
+    .Main_Chart_Wrapper {
       width: 100%;
       height: 100%;
     }
@@ -58,6 +59,7 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route element={<MainChart />} path="/" />
+            <Route element={<MelonHot100Chart />} path="/melon100/chart" />
             <Route element={<MelonChart />} path="/melon/chart" />
             <Route element={<BugsChart />} path="/bugs/chart" />
             <Route element={<FloChart />} path="/flo/chart" />

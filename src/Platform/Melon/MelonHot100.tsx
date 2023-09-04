@@ -29,7 +29,7 @@ const ChartWrapper = styled.div`
   }
 `;
 
-export default function MelonChart() {
+export default function MelonHot100Chart() {
   const itemsPerPage = 5;
   const [pageStartIndex, setPageStartIndex] = useState(0);
   const [pageEndIndex, setPageEndIndex] = useState(itemsPerPage - 1);
@@ -47,11 +47,15 @@ export default function MelonChart() {
 
   return (
     <MelonLayoutContainer>
-      <ChartTitle chartType="daily" platform={"Melon"} date="2022-11-30" />
+      <ChartTitle
+        chartType="daily"
+        platform={"Melon Hot 100"}
+        date="2022-11-30"
+      />
       <ChartWrapper>
         <ChartCard
           used="page"
-          platform={"Melon"}
+          platform={"Melon100"}
           searchValue={""}
           numPage={numPage}
           setNumPage={setNumPage}

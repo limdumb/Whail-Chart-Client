@@ -25,12 +25,13 @@ export default function MainChart() {
 
   return (
     <PageLayoutContainer>
-      <ChartTitle chartType={"realTime"} />
+      <ChartTitle chartType={"realTime"} platform={""} />
       <div className="Chart_Container">
         {firstPletformArr.map((el, index) => {
           return (
             <div className="Main_Chart_Wrapper" key={index}>
               <ChartCard
+                used="all"
                 numPage={numPage}
                 setNumPage={setNumPage}
                 pageStartIndex={pageStartIndex}
@@ -50,6 +51,7 @@ export default function MainChart() {
           return (
             <div className="Main_Chart_Wrapper" key={index}>
               <ChartCard
+                used="all"
                 numPage={numPage}
                 setNumPage={setNumPage}
                 pageStartIndex={pageStartIndex}

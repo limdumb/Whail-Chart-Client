@@ -1,8 +1,8 @@
 import "./css/chartTitle.css";
 import { CustomSpan } from "../CustomSpan";
-import { PletformValueType } from "../../Function/pletformValue";
+import { PlatformValueType } from "../../Function/pletformValue";
 
-interface ChartTitleType extends PletformValueType {
+interface ChartTitleType extends PlatformValueType {
   chartType: "daily" | "realTime";
 }
 
