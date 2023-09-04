@@ -37,7 +37,7 @@ export default function MainChart() {
                 pageEndIndex={pageEndIndex}
                 handleNextClick={handleNextClick}
                 handlePrevClick={handlePrevClick}
-                platform={el.name}
+                platform={el.platform}
                 searchValue={""}
                 chartType={"realTime"}
               />
@@ -56,7 +56,7 @@ export default function MainChart() {
                 pageEndIndex={pageEndIndex}
                 handleNextClick={handleNextClick}
                 handlePrevClick={handlePrevClick}
-                platform={el.name}
+                platform={el.platform}
                 searchValue={""}
                 chartType={"realTime"}
               />

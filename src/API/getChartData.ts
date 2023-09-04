@@ -20,7 +20,7 @@ export const getChartData = async (props: Props) => {
   //   `/songs/${props.platform}`
   // );
 
-  const test: ChartDataResponse = dummydata()
+  const test: ChartDataResponse = dummydata();
   return test;
 
   // return response.data

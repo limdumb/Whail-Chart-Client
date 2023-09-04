@@ -1,14 +1,15 @@
-interface PletformValueType {
-  name: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
+export interface PletformValueType {
+  platform: "Melon100" | "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
 }
 
 export const pletformValue = () => {
   const value: PletformValueType[] = [
-    { name: "Melon" },
-    { name: "Genie" },
-    { name: "Bugs" },
-    { name: "Flo" },
-    { name: "Vibe" },
+    { platform: "Melon100" },
+    { platform: "Melon" },
+    { platform: "Genie" },
+    { platform: "Bugs" },
+    { platform: "Flo" },
+    { platform: "Vibe" },
   ];
 
   return value;

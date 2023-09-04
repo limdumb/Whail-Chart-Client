@@ -1,23 +1,31 @@
-import "./css/chartTitle.css"
+import "./css/chartTitle.css";
 import { CustomSpan } from "../CustomSpan";
+import { PletformValueType } from "../../Function/pletformValue";
 
-interface ChartTitleType {
+interface ChartTitleType extends PletformValueType {
   chartType: "daily" | "realTime";
-  pletform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
 }
 
 export default function ChartTitle(props: ChartTitleType) {
   return (
     <>
-      {props.chartType === "realTime" ? (
-        <CustomSpan
-          children={`${props.pletform} 실시간 차트`}
-          fontSize={18}
-          fontWeight={500}
-        />
+      {props.platform !== "Melon100" ? (
+        props.chartType === "realTime" ? (
+          <CustomSpan
+            children={`${props.platform} 실시간 차트`}
+            fontSize={18}
+            fontWeight={500}
+          />
+        ) : (
+          <CustomSpan
+            children={`${props.platform} 일간 차트`}
+            fontSize={18}
+            fontWeight={500}
+          />
+        )
       ) : (
         <CustomSpan
-          children={`${props.pletform} 일간 차트`}
+          children="Melon Hot 100 차트"
           fontSize={18}
           fontWeight={500}
         />

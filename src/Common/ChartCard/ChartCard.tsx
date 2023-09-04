@@ -11,6 +11,7 @@ import { getChartData } from "../../API/getChartData";
 import { changeDate } from "../../Function/changeDate";
 import { itemPerPage } from "../../Function/itemPerPage";
 import "./css/chartCard.css";
+import { PletformValueType } from "../../Function/pletformValue";
 
 export interface SongDataType {
   rank: number;
@@ -28,8 +29,7 @@ export interface SongDataType {
   };
 }
 
-interface ChartCardProps {
-  platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
+interface ChartCardProps extends PletformValueType {
   searchValue: string;
   numPage: number;
   setNumPage: React.Dispatch<React.SetStateAction<number>>;
@@ -103,7 +103,6 @@ export default function ChartCard(props: ChartCardProps) {
   const endIndex = startIndex + itemsPerPageValue;
   const currentData =
     query.data && query.data.chart.slice(startIndex, endIndex);
-  console.log(pageActiveIndex);
 
   const changedDate = changeDate(query.data?.date, query.data?.hour);
 
@@ -127,7 +126,7 @@ export default function ChartCard(props: ChartCardProps) {
   return (
     <ChartCardWrapper>
       <div className="Chart_Title_Wrapper">
-        <ChartTitle chartType={props.chartType} pletform={props.platform} />
+        <ChartTitle chartType={props.chartType} platform={props.platform} />
       </div>
       <div className="Search_Input_Wrapper">
         <CustomSpan
