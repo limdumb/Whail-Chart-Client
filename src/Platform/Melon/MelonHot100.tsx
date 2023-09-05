@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import ChartCard from "../../Common/ChartCard/ChartCard";
 import { useState } from "react";
 import ChartTitle from "../../Common/ChartTitle";
 
@@ -35,16 +34,6 @@ export default function MelonHot100Chart() {
   const [pageEndIndex, setPageEndIndex] = useState(itemsPerPage - 1);
   const [numPage, setNumPage] = useState(0);
 
-  const handlePrevClick = () => {
-    setPageStartIndex(pageStartIndex - itemsPerPage);
-    setPageEndIndex(pageEndIndex - itemsPerPage);
-  };
-
-  const handleNextClick = () => {
-    setPageStartIndex(pageEndIndex + 1);
-    setPageEndIndex(pageEndIndex + itemsPerPage);
-  };
-
   return (
     <MelonLayoutContainer>
       <ChartTitle
@@ -53,18 +42,18 @@ export default function MelonHot100Chart() {
         date="2022-11-30"
       />
       <ChartWrapper>
-        <ChartCard
+        {/* <ChartCard
+          setPageStartIndex={setPageStartIndex}
+          setPageEndIndex={setPageEndIndex}
           used="page"
           platform={"Melon100"}
           searchValue={""}
           numPage={numPage}
           setNumPage={setNumPage}
-          handlePrevClick={handlePrevClick}
-          handleNextClick={handleNextClick}
           pageEndIndex={pageEndIndex}
           pageStartIndex={pageStartIndex}
           chartType={"daily"}
-        />
+        /> */}
       </ChartWrapper>
     </MelonLayoutContainer>
   );

@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
-import ChartCard from "../../Common/ChartCard/ChartCard";
 
 const VibeLayoutContainer = styled.div`
   margin-left: 260px;
@@ -35,32 +34,22 @@ export default function VibeChart() {
   const [pageEndIndex, setPageEndIndex] = useState(itemsPerPage - 1);
   const [numPage, setNumPage] = useState(0);
 
-  const handlePrevClick = () => {
-    setPageStartIndex(pageStartIndex - itemsPerPage);
-    setPageEndIndex(pageEndIndex - itemsPerPage);
-  };
-
-  const handleNextClick = () => {
-    setPageStartIndex(pageEndIndex + 1);
-    setPageEndIndex(pageEndIndex + itemsPerPage);
-  };
-
   return (
     <VibeLayoutContainer>
       <ChartTitle chartType="daily" platform={"Vibe"} date="2022-11-30" />
       <ChartWrapper>
-        <ChartCard
+        {/* <ChartCard
           used="page"
           platform={"Vibe"}
           searchValue={""}
           numPage={numPage}
           setNumPage={setNumPage}
-          handlePrevClick={handlePrevClick}
-          handleNextClick={handleNextClick}
           pageEndIndex={pageEndIndex}
           pageStartIndex={pageStartIndex}
           chartType={"daily"}
-        />
+          setPageStartIndex={setPageStartIndex}
+          setPageEndIndex={setPageEndIndex}
+        /> */}
       </ChartWrapper>
     </VibeLayoutContainer>
   );

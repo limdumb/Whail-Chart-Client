@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
-import ChartCard from "../../Common/ChartCard/ChartCard";
 
 const FloLayoutContainer = styled.div`
   margin-left: 260px;
@@ -35,32 +34,22 @@ export default function FloChart() {
   const [pageEndIndex, setPageEndIndex] = useState(buttonPerPage - 1);
   const [numPage, setNumPage] = useState(0);
 
-  const handlePrevClick = () => {
-    setPageStartIndex(pageStartIndex - buttonPerPage);
-    setPageEndIndex(pageEndIndex - buttonPerPage);
-  };
-
-  const handleNextClick = () => {
-    setPageStartIndex(pageEndIndex + 1);
-    setPageEndIndex(pageEndIndex + buttonPerPage);
-  };
-
   return (
     <FloLayoutContainer>
       <ChartTitle chartType="daily" platform={"Flo"} date="2022-11-30" />
       <ChartWrapper>
-        <ChartCard
+        {/* <ChartCard
+          setPageStartIndex={setPageStartIndex}
+          setPageEndIndex={setPageEndIndex}
           used="page"
           platform={"Flo"}
           searchValue={""}
           numPage={numPage}
           setNumPage={setNumPage}
-          handlePrevClick={handlePrevClick}
-          handleNextClick={handleNextClick}
           pageEndIndex={pageEndIndex}
           pageStartIndex={pageStartIndex}
           chartType={"daily"}
-        />
+        /> */}
       </ChartWrapper>
     </FloLayoutContainer>
   );

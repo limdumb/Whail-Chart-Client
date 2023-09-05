@@ -1,4 +1,5 @@
 import { CustomSpan } from "./CustomSpan";
+import "./ChartCard/css/chartTitle.css"
 
 interface ChartTitleProps {
   chartType: "daily" | "realTime";
