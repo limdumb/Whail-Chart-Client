@@ -9,9 +9,16 @@ import { getChartData } from "../API/getChartData";
 import { changeDate } from "../Function/changeDate";
 
 export default function MainChart() {
-  const pletformArr = pletformValue();
+  const platformArr = pletformValue();
   const buttonPerPage = 5;
-  const [numPage, setNumPage] = useState(0);
+  const [numPage, setNumPage] = useState([
+    { pageCount: 0 },
+    { pageCount: 0 },
+    { pageCount: 0 },
+    { pageCount: 0 },
+    { pageCount: 0 },
+    { pageCount: 0 },
+  ]);
   const buttonsPerPageValue = 5;
 
   const [chartCardPageIndex, setChartCardPageIndex] = useState([
@@ -41,11 +48,11 @@ export default function MainChart() {
 
     setChartCardPageIndex(newChartCardPageIndex);
   };
-  
-  const chartDataResponse = pletformArr.map((el)=>{
+
+  const chartDataResponse = platformArr.map((el) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const query = useQuery({
-      queryKey: ["chartData", "melon"],
+      queryKey: ["chartData", `${el.platform}`],
       queryFn: async () => {
         const data = await getChartData({
           platform: el.platform,
@@ -54,53 +61,42 @@ export default function MainChart() {
         return data;
       },
     });
-    return query
-  })
-  // 데이터처리해
-  console.log(chartDataResponse)
-
-  const query = useQuery({
-    queryKey: ["chartData", "melon"],
-    queryFn: async () => {
-      const data = await getChartData({
-        platform: "Melon",
-        chartType: "realTime",
-      });
-      return data;
-    },
+    return query;
   });
 
   useEffect(() => {
-    if (query.isFetched && query.data) {
-      setNumPage(Math.ceil(query.data.chart.length / 10));
-    }
-  }, [query.data, query.isFetched]);
+    chartDataResponse.map((el, index) => {
+      if (el.data && el.isFetched) {
+        const newNumPageArr = [...numPage];
+        const newPageNum = Math.ceil(el.data.chart.length / 10);
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+        newNumPageArr[index].pageCount = newPageNum;
+        setNumPage(newNumPageArr);
+      }
+    });
+  }, [chartDataResponse]);
 
-  // const response = pletformArr.map((el)=>{
-  // })
+  const updateTime = chartDataResponse.map((query) => {
+    const transformDate = changeDate(query.data?.date, query.data?.hour);
+    return transformDate;
+  });
 
-  /*
-  map, 
-  [0] = { startIndex, endIndex }
-  [1] = { startIndex, endIndex }
-
-  */
-  const updateTime = changeDate(query.data?.date, query.data?.hour);
   return (
     <PageLayoutContainer>
       <ChartTitle chartType={"realTime"} platform={""} />
       <div className="Chart_Container">
-        {pletformArr.map((el, index) => {
+        {chartDataResponse.map((el, index) => {
           return (
             <div className="Main_Chart_Wrapper" key={index}>
               <NewChartCard
                 index={index}
+                chartType="realTime"
                 handleNextClick={handleNextClick}
                 handlePrevClick={handlePrevClick}
-                updateTime={updateTime}
-                platform={el.platform}
+                updateTime={updateTime[index]}
+                platform={platformArr[index].platform}
                 charts={
-                  query.data?.chart.map((item) => ({
+                  el.data?.chart.map((item) => ({
                     rank: item.rank,
                     previousRank: item.previous,
                     image: item.song.image,
@@ -110,36 +106,13 @@ export default function MainChart() {
                 }
                 startPageNum={chartCardPageIndex[index].startIndex}
                 endPageNumber={chartCardPageIndex[index].endIndex}
-                currentPageNumber={numPage}
+                currentPageNumber={numPage[index].pageCount}
               />
             </div>
           );
         })}
       </div>
       <div className="Last_Chart_Container"></div>
-      {/* <div className="Last_Chart_Container">
-        {lastPetformArr.map((el, index) => {
-          return (
-            <div className="Main_Chart_Wrapper" key={index}>
-              <ChartCard
-                index={index}
-                clickIndex={clickIndex}
-                setClickIndex={setClickIndex}
-                setPageStartIndex={index => {}}
-                setPageEndIndex={setPageEndIndex}
-                used="all"
-                numPage={numPage}
-                setNumPage={setNumPage}
-                pageStartIndex={pageStartIndex}
-                pageEndIndex={pageEndIndex}
-                platform={el.platform}
-                searchValue={""}
-                chartType={"realTime"}
-              />
-            </div>
-          );
-        })}
-      </div> */}
     </PageLayoutContainer>
   );
 }

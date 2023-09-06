@@ -25,6 +25,7 @@ interface NewChartCardProps extends PlatformValueType {
   handlePrevClick: (index: number) => void;
   handleNextClick: (index: number) => void;
   index: number;
+  chartType:"realTime" | "daily"
 }
 
 export default function NewChartCard(props: NewChartCardProps) {
@@ -41,11 +42,11 @@ export default function NewChartCard(props: NewChartCardProps) {
   const handleClick = (index: number) => {
     setPageActiveIndex(index);
   };
-  // console.log(pageButtonArr)
+
   return (
     <ChartCardWrapper>
       <div className="Chart_Title_Wrapper">
-        <ChartTitle chartType={"daily"} platform={props.platform} />
+        <ChartTitle chartType={props.chartType} platform={props.platform} />
       </div>
       <div className="Search_Input_Wrapper">
         <CustomSpan
