@@ -12,6 +12,7 @@ import { PageButton } from "../PageButton";
 
 interface NewChartCardProps extends PlatformValueType {
   charts: {
+    id: number;
     rank: number;
     previousRank: number;
     image: string;
@@ -25,7 +26,7 @@ interface NewChartCardProps extends PlatformValueType {
   handlePrevClick: (index: number) => void;
   handleNextClick: (index: number) => void;
   index: number;
-  chartType:"realTime" | "daily"
+  chartType: "realTime" | "daily";
 }
 
 export default function NewChartCard(props: NewChartCardProps) {
@@ -71,9 +72,10 @@ export default function NewChartCard(props: NewChartCardProps) {
       </div>
       <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} />
       <RankingChartWrapper>
-        {currentData.map((el) => {
+        {currentData.map((el, index) => {
           return (
             <RankCard
+              key={index}
               rank={el.rank}
               image={el.image}
               song={el.songName}
@@ -106,9 +108,9 @@ export default function NewChartCard(props: NewChartCardProps) {
         <MoveButton
           children={">>"}
           onClick={() => {
-            console.log(props.endPageNumber)
-            console.log(pageButtonArr.length)
-            if(props.endPageNumber === pageButtonArr.length)
+            console.log(props.endPageNumber);
+            console.log(pageButtonArr.length);
+            if (props.endPageNumber === pageButtonArr.length)
               props.handleNextClick(props.index);
           }}
         />

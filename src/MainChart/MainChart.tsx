@@ -65,7 +65,7 @@ export default function MainChart() {
   });
 
   useEffect(() => {
-    chartDataResponse.map((el, index) => {
+    chartDataResponse.forEach((el, index) => {
       if (el.data && el.isFetched) {
         const newNumPageArr = [...numPage];
         const newPageNum = Math.ceil(el.data.chart.length / 10);
@@ -74,7 +74,7 @@ export default function MainChart() {
         setNumPage(newNumPageArr);
       }
     });
-  }, [chartDataResponse]);
+  }, [chartDataResponse, numPage]);
 
   const updateTime = chartDataResponse.map((query) => {
     const transformDate = changeDate(query.data?.date, query.data?.hour);
@@ -97,6 +97,7 @@ export default function MainChart() {
                 platform={platformArr[index].platform}
                 charts={
                   el.data?.chart.map((item) => ({
+                    id: item.song.id,
                     rank: item.rank,
                     previousRank: item.previous,
                     image: item.song.image,

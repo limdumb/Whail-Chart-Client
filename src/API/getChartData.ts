@@ -31,14 +31,14 @@ export interface SongDataType {
 }
 
 export const getChartData = async (props: Props) => {
-  const params = props.platform.toLowerCase()
-  // const response: AxiosResponse<ChartDataResponse> = await baseInstance.get(
-  //   `/songs/${params}`
-  // );
-  
+  const params = props.platform.toLowerCase();
+  console.log(params)
+  const response: AxiosResponse<ChartDataResponse> = await baseInstance.get(
+    `/songs/${params}`
+  );
 
-  const test: ChartDataResponse = dummydata();
-  return test;
+  // const test: ChartDataResponse = dummydata();
+  return response.data;
 
   // return response.data
 };
