@@ -95,7 +95,7 @@ interface FloDailyChartType {
 /* 
   Platform 별 Response Data Type 정의
   Platform별 if문 정의 
-
+  데이터호출
 */
 export const getDailyChartData = async (props: DailyChartProps) => {
   const params = props.platform.toLowerCase();
