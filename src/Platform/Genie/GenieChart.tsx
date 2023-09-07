@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
-import ChartCard from "../../Common/ChartCard/ChartCard";
 
 const GenieLayoutContainer = styled.div`
   margin-left: 260px;
@@ -31,37 +30,26 @@ const ChartWrapper = styled.div`
 
 export default function GenieChart() {
   const buttonPerPage = 5;
-  const itemsPerPage = 10;
   const [pageStartIndex, setPageStartIndex] = useState(0);
   const [pageEndIndex, setPageEndIndex] = useState(buttonPerPage - 1);
   const [numPage, setNumPage] = useState(0);
-
-  const handlePrevClick = () => {
-    setPageStartIndex(pageStartIndex - buttonPerPage);
-    setPageEndIndex(pageEndIndex - buttonPerPage);
-  };
-
-  const handleNextClick = () => {
-    setPageStartIndex(pageEndIndex + 1);
-    setPageEndIndex(pageEndIndex + buttonPerPage);
-  };
 
   return (
     <GenieLayoutContainer>
       <ChartTitle chartType="daily" platform={"Genie"} date="2022-11-30" />
       <ChartWrapper>
-        <ChartCard
+        {/* <ChartCard
+          setPageStartIndex={setPageStartIndex}
+          setPageEndIndex={setPageEndIndex}
           used="page"
           platform={"Genie"}
           searchValue={""}
           numPage={numPage}
           setNumPage={setNumPage}
-          handlePrevClick={handlePrevClick}
-          handleNextClick={handleNextClick}
           pageEndIndex={pageEndIndex}
           pageStartIndex={pageStartIndex}
           chartType={"daily"}
-        />
+        /> */}
       </ChartWrapper>
     </GenieLayoutContainer>
   );

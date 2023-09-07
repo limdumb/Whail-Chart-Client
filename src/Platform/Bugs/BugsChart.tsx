@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import ChartCard from "../../Common/ChartCard/ChartCard";
 import ChartTitle from "../../Common/ChartTitle";
 import { useState } from "react";
 
@@ -35,32 +34,22 @@ export default function BugsChart() {
   const [pageEndIndex, setPageEndIndex] = useState(buttonPerPage - 1);
   const [numPage, setNumPage] = useState(0);
 
-  const handlePrevClick = () => {
-    setPageStartIndex(pageStartIndex - buttonPerPage);
-    setPageEndIndex(pageEndIndex - buttonPerPage);
-  };
-
-  const handleNextClick = () => {
-    setPageStartIndex(pageEndIndex + 1);
-    setPageEndIndex(pageEndIndex + buttonPerPage);
-  };
-
   return (
     <BugsLayoutContainer>
       <ChartTitle chartType="daily" platform={"Bugs"} date="2022-11-30" />
       <ChartWrapper>
-        <ChartCard
+        {/* <ChartCard
+          setPageStartIndex={setPageStartIndex}
+          setPageEndIndex={setPageEndIndex}
           used="page"
           platform={"Bugs"}
           searchValue={""}
           numPage={numPage}
           setNumPage={setNumPage}
-          handlePrevClick={handlePrevClick}
-          handleNextClick={handleNextClick}
           pageEndIndex={pageEndIndex}
           pageStartIndex={pageStartIndex}
           chartType={"daily"}
-        />
+        /> */}
       </ChartWrapper>
     </BugsLayoutContainer>
   );

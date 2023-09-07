@@ -1,4 +1,4 @@
-import { SongDataType } from "../Common/ChartCard/ChartCard";
+import { SongDataType } from "./getChartData";
 
 interface ChartDataResponse {
   platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";

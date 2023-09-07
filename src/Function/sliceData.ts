@@ -1,4 +1,4 @@
-import { SongDataType } from "../Common/ChartCard/ChartCard";
+import { SongDataType } from "../API/getChartData";
 
 export const sliceData =(chart:SongDataType[], pages:number, perPages:number) => {
   const startIndex = (pages - 1) * perPages;
