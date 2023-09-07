@@ -31,7 +31,6 @@ export interface SongDataType {
 
 export const getChartData = async (props: Props) => {
   const params = props.platform.toLowerCase();
-  console.log(params)
   const response: AxiosResponse<ChartDataResponse> = await baseInstance.get(
     `/songs/${params}`
   );
