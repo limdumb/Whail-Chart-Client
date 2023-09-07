@@ -45,7 +45,6 @@ export default function MainChart() {
       newChartCardPageIndex[index].endIndex;
     newChartCardPageIndex[index].endIndex =
       newChartCardPageIndex[index].endIndex + buttonPerPage;
-
     setChartCardPageIndex(newChartCardPageIndex);
   };
 
@@ -56,7 +55,6 @@ export default function MainChart() {
       queryFn: async () => {
         const data = await getChartData({
           platform: el.platform,
-          chartType: "realTime",
         });
         return data;
       },
@@ -74,7 +72,8 @@ export default function MainChart() {
         setNumPage(newNumPageArr);
       }
     });
-  }, [chartDataResponse, numPage]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chartDataResponse]);
 
   const updateTime = chartDataResponse.map((query) => {
     const transformDate = changeDate(query.data?.date, query.data?.hour);
@@ -89,6 +88,7 @@ export default function MainChart() {
           return (
             <div className="Main_Chart_Wrapper" key={index}>
               <NewChartCard
+                used="all"
                 index={index}
                 chartType="realTime"
                 handleNextClick={handleNextClick}

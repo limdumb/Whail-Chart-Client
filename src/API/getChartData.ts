@@ -10,7 +10,6 @@ interface ChartDataResponse {
 }
 
 interface Props extends PlatformValueType {
-  chartType: "daily" | "realTime";
 }
 
 export interface SongDataType {

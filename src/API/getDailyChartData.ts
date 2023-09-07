@@ -99,50 +99,38 @@ interface FloDailyChartType {
 */
 export const getDailyChartData = async (props: DailyChartProps) => {
   const params = props.platform.toLowerCase();
-  if (params === "melon") {
-    try {
+  try {
+    if (params === "melon") {
       const response: AxiosResponse<ChartDataResponse<MelonDailyChartType>> =
         await baseInstance.get(`/songs/daily/${params}/${props.date}`);
-      return response;
-    } catch (err) {
-      console.error(err);
+      return response.data;
     }
-  }
 
-  if (params === "genie") {
-    try {
+    if (params === "genie") {
       const response: AxiosResponse<ChartDataResponse<GenieDailyChartType>> =
         await baseInstance.get(`/songs/daily/${params}/${props.date}`);
-      return response;
-    } catch (err) {
-      console.error(err);
+      return response.data;
     }
-  }
-  if (params === "flo") {
-    try {
+
+    if (params === "flo") {
       const response: AxiosResponse<ChartDataResponse<FloDailyChartType>> =
         await baseInstance.get(`/songs/daily/${params}/${props.date}`);
-      return response;
-    } catch (err) {
-      console.error(err);
+      return response.data;
     }
-  }
-  if (params === "bugs") {
-    try {
+
+    if (params === "bugs") {
       const response: AxiosResponse<ChartDataResponse<BugsDailyChartType>> =
         await baseInstance.get(`/songs/daily/${params}/${props.date}`);
-      return response;
-    } catch (err) {
-      console.error(err);
+      return response.data;
     }
-  }
-  if (params === "vibe") {
-    try {
+
+    if (params === "vibe") {
       const response: AxiosResponse<ChartDataResponse<VibeDailyChartType>> =
         await baseInstance.get(`/songs/daily/${params}/${props.date}`);
-      return response;
-    } catch (err) {
-      console.error(err);
+      return response.data;
     }
+
+  } catch (err) {
+    console.error(err);
   }
 };
