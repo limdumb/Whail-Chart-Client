@@ -1,6 +1,5 @@
 import { AxiosResponse } from "axios";
 import { baseInstance } from "./instance";
-import dummydata from "./dummydata";
 import { PlatformValueType } from "../Function/pletformValue";
 
 interface ChartDataResponse {
@@ -37,8 +36,5 @@ export const getChartData = async (props: Props) => {
     `/songs/${params}`
   );
 
-  // const test: ChartDataResponse = dummydata();
   return response.data;
-
-  // return response.data
 };
