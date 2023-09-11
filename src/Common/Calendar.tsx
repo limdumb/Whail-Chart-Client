@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./css/calendar.css";
 import { CustomSpan } from "./CustomSpan";
 import { styled } from "styled-components";
+import CustomButton from "./Header/CustomButton";
 
 interface CalendarProps {
   year: number;
@@ -52,13 +53,17 @@ const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
   return (
     <div className="Calendar_Wrapper">
       <div className="Calendar_Header">
-        <button onClick={goToPreviousMonth}>&lt;</button>
+        <button className="Previous_Button" onClick={goToPreviousMonth}>
+          &lt;
+        </button>
         <CustomSpan
           children={`${props.year}년 ${props.month + 1}월`}
           fontSize={16}
           fontWeight={700}
         />
-        <button onClick={goToNextMonth}>&gt;</button>
+        <button className="Previous_Button" onClick={goToNextMonth}>
+          &gt;
+        </button>
       </div>
       <table className="Week_Wrapper">
         <thead>
@@ -80,6 +85,18 @@ const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
             month={props.month}
           />
         </tbody>
+        <div className="Submit_Button_Wrapper">
+          <CustomButton
+            children={"확인"}
+            type={"button"}
+            width={"280px"}
+            height={""}
+            backgroundColor={"#5f76e8"}
+            color={"white"}
+            fontWeight={600}
+            borderRadius={"5px"}
+          />
+        </div>
       </table>
     </div>
   );

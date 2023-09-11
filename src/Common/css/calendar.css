@@ -50,3 +50,15 @@ td {
   border-radius: 100%;
   cursor: pointer;
 }
+
+.Submit_Button_Wrapper{
+  position: fixed;
+  top: 473px;
+}
+
+.Previous_Button{
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+}
