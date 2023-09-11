@@ -1,0 +1,52 @@
+td {
+  text-align: center; /* 텍스트 가운데 정렬 */
+  vertical-align: middle; /* 수직 가운데 정렬 */
+}
+
+.Calendar_Wrapper {
+  background-color: white;
+  z-index: 9;
+  color: black;
+  width: 302px;
+  height: 340px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  opacity: 1;
+}
+
+.Calendar_Header{
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Week_Wrapper{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.current-month {
+  background-color: #fff;
+  color: #333;
+  height: 40px;
+  cursor: pointer;
+
+}
+
+.other-month {
+  background-color: #f0f0f0;
+  color: #ccc;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 100%;
+  cursor: pointer;
+}
