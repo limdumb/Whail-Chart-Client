@@ -4,10 +4,10 @@ import { AiFillCalendar } from "react-icons/ai";
 interface ButtonPropsType {
   width: string;
   height: string;
-  backgroundColor?: string;
+  backgroundcolor?: string;
   color?: string;
   fontWeight?: number;
-  borderRadius?: string;
+  borderradius?: string;
 }
 interface Props extends ButtonPropsType {
   children: string;
@@ -19,11 +19,11 @@ const Button = styled.button<ButtonPropsType>`
   padding: 6px 12px;
   border: 1px solid rgb(95, 118, 232);
   border-radius: ${(props) =>
-    props.borderRadius ? props.borderRadius : "2em"};
+    props.borderradius ? props.borderradius : "2em"};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "white"};
+    props.backgroundcolor ? props.backgroundcolor : "white"};
   color: ${(props) => (props.color ? props.color : "rgb(95, 118, 232);")};
   font-size: 16px;
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 400)};
@@ -33,12 +33,12 @@ export default function CustomButton(props: Props) {
   return (
     <>
       <Button
-      borderRadius={props.borderRadius}
+      borderradius={props.borderradius}
         fontWeight={props.fontWeight}
         color={props.color}
         width={props.width}
         height={props.height}
-        backgroundColor={props.backgroundColor}
+        backgroundcolor={props.backgroundcolor}
       >
         {props.children}
         {props.type === "calendar" ? (

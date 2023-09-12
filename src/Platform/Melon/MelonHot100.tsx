@@ -30,8 +30,8 @@ const ChartWrapper = styled.div`
 `;
 
 export default function MelonHot100Chart() {
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [month, setMonth] = useState(new Date().getMonth());
+  const [selectedDate, setSelectedDate] = useState(new Date()); // 선택한 날짜를 저장할 상태
+  const [clickedDate, setClickedDate] = useState<Date>(new Date());
 
   return (
     <MelonLayoutContainer>
@@ -42,10 +42,10 @@ export default function MelonHot100Chart() {
       />
       <ChartWrapper>
         <Calendar
-          year={year}
-          month={month}
-          setYear={setYear}
-          setMonth={setMonth}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          clickedDate={clickedDate}
+          setClickedDate={setClickedDate}
         />
       </ChartWrapper>
     </MelonLayoutContainer>
