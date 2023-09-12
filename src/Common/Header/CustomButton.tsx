@@ -12,6 +12,7 @@ interface ButtonPropsType {
 interface Props extends ButtonPropsType {
   children: string;
   type: "button" | "calendar";
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const Button = styled.button<ButtonPropsType>`

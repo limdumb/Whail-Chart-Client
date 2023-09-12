@@ -3,27 +3,32 @@ import { styled } from "styled-components";
 import CustomButton from "./Header/CustomButton";
 import { calendarDate } from "../Function/calendarDate";
 import "./css/calendar.css";
+import { useState } from "react";
 
 interface CalendarProps {
   selectedDate: Date;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
   clickedDate: Date;
   setClickedDate: React.Dispatch<React.SetStateAction<Date>>;
+  apiRequestFunc: () => {};
 }
 
 const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
   const calendarDateArray = calendarDate(props.selectedDate);
+  const [nowDate, setNowDate] = useState(props.selectedDate);
 
   const changeYear = (year: number) => {
     const date = new Date(props.selectedDate.getTime());
     date.setFullYear(date.getFullYear() + year);
     props.setSelectedDate(date);
+    setNowDate(date);
   };
 
   const changeMonth = (month: number) => {
     const date = new Date(props.selectedDate.getTime());
     date.setMonth(date.getMonth() + month);
     props.setSelectedDate(date);
+    setNowDate(date);
   };
 
   const dayClickedHandler = (date: Date) => {
@@ -89,25 +94,28 @@ const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
           return (
             <RenderCalendarDays
               key={i}
+              clickedDate={props.clickedDate}
+              nowDate={nowDate}
               dayClickedHandler={dayClickedHandler}
               selectedDate={props.selectedDate}
               day={day}
             />
           );
         })}
+        <div className="Submit_Button_Wrapper">
+          <CustomButton
+            children={"확인"}
+            type={"button"}
+            width={"290px"}
+            height={""}
+            backgroundcolor={"#5f76e8"}
+            color={"white"}
+            fontWeight={600}
+            borderradius={"5px"}
+            onClick={() => {}}
+          />
+        </div>
       </CalenderTable>
-      <div className="Submit_Button_Wrapper">
-        <CustomButton
-          children={"확인"}
-          type={"button"}
-          width={"290px"}
-          height={""}
-          backgroundcolor={"#5f76e8"}
-          color={"white"}
-          fontWeight={600}
-          borderradius={"5px"}
-        />
-      </div>
     </div>
   );
 };
@@ -116,18 +124,21 @@ interface RenderCalendarDaysProps {
   selectedDate: Date;
   dayClickedHandler: (date: Date) => void;
   day: Date;
+  nowDate: Date;
+  clickedDate: Date;
 }
 
 const RenderCalendarDays = ({
   dayClickedHandler,
   day,
+  nowDate,
+  clickedDate,
 }: RenderCalendarDaysProps) => {
-  const nowTime = new Date();
-  const sameMonth = nowTime.getMonth() === day.getMonth();
+  const sameMonth = nowDate.getMonth() === day.getMonth();
   const sameDay =
-    nowTime.getFullYear() === day.getFullYear() &&
-    nowTime.getMonth() === day.getMonth() &&
-    nowTime.getDate() === day.getDate();
+    clickedDate.getFullYear() === day.getFullYear() &&
+    clickedDate.getMonth() === day.getMonth() &&
+    clickedDate.getDate() === day.getDate();
 
   return (
     <DayWrapper>
@@ -155,11 +166,15 @@ interface DayTableProps {
 
 const DayTable = styled.div<DayTableProps>`
   color: ${(props) => (props.samemonth ? "black" : "gray")};
-  font-weight: ${(props)=>props.samemonth ? 600:400};
+  font-weight: ${(props) => (props.samemonth ? 600 : 400)};
   height: 40px;
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: ${(props) => (props.sameday ? "#5f76e8" : "none")};
+  width: 40px;
+  border-radius: 50%;
 `;
 
 const WeekWrapper = styled.div<{ day: string }>`
@@ -182,15 +197,14 @@ const DayWrapper = styled.div`
   display: flex;
   justify-content: center;
   cursor: pointer;
-  &:hover{
-    background-color: #7c8798;
+  &:hover {
+    background-color: #e8eaec;
     border-radius: 100%;
-    
   }
-`
+`;
 
 const CalenderTable = styled.div`
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(7,1fr);
-`
+  grid-template-columns: repeat(7, 1fr);
+`;

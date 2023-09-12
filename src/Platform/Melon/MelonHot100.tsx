@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { useState } from "react";
 import ChartTitle from "../../Common/ChartTitle";
 import Calendar from "../../Common/Calendar";
+import { transformDate } from "../../Function/transformDate";
 
 const MelonLayoutContainer = styled.div`
   margin-left: 260px;
@@ -30,9 +31,6 @@ const ChartWrapper = styled.div`
 `;
 
 export default function MelonHot100Chart() {
-  const [selectedDate, setSelectedDate] = useState(new Date()); // 선택한 날짜를 저장할 상태
-  const [clickedDate, setClickedDate] = useState<Date>(new Date());
-
   return (
     <MelonLayoutContainer>
       <ChartTitle
@@ -40,14 +38,7 @@ export default function MelonHot100Chart() {
         platform={"Melon Hot 100"}
         date="2022-11-30"
       />
-      <ChartWrapper>
-        <Calendar
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
-          clickedDate={clickedDate}
-          setClickedDate={setClickedDate}
-        />
-      </ChartWrapper>
+      <ChartWrapper></ChartWrapper>
     </MelonLayoutContainer>
   );
 }
