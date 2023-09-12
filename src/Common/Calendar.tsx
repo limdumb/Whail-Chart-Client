@@ -76,37 +76,37 @@ const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
         </button>
       </div>
       <div className="Week_Wrapper">
-        <div>
-          <div>
-            {weekArr.map((el) => {
-              return <div key={el}>{el}</div>;
-            })}
-          </div>
-        </div>
-        <div className="Calender_Table">
-          {calendarDateArray.map((day, i) => {
-            return (
-              <RenderCalendarDays
-                key={i}
-                dayClickedHandler={dayClickedHandler}
-                selectedDate={props.selectedDate}
-                day={day}
-              />
-            );
-          })}
-        </div>
-        <div className="Submit_Button_Wrapper">
-          <CustomButton
-            children={"확인"}
-            type={"button"}
-            width={"280px"}
-            height={""}
-            backgroundcolor={"#5f76e8"}
-            color={"white"}
-            fontWeight={600}
-            borderradius={"5px"}
-          />
-        </div>
+        {weekArr.map((el) => {
+          return (
+            <WeekWrapper day={el} key={el}>
+              <span>{el}</span>
+            </WeekWrapper>
+          );
+        })}
+      </div>
+      <CalenderTable>
+        {calendarDateArray.map((day, i) => {
+          return (
+            <RenderCalendarDays
+              key={i}
+              dayClickedHandler={dayClickedHandler}
+              selectedDate={props.selectedDate}
+              day={day}
+            />
+          );
+        })}
+      </CalenderTable>
+      <div className="Submit_Button_Wrapper">
+        <CustomButton
+          children={"확인"}
+          type={"button"}
+          width={"290px"}
+          height={""}
+          backgroundcolor={"#5f76e8"}
+          color={"white"}
+          fontWeight={600}
+          borderradius={"5px"}
+        />
       </div>
     </div>
   );
@@ -130,7 +130,7 @@ const RenderCalendarDays = ({
     nowTime.getDate() === day.getDate();
 
   return (
-    <div>
+    <DayWrapper>
       <DayTable
         samemonth={sameMonth}
         sameday={sameDay}
@@ -141,7 +141,7 @@ const RenderCalendarDays = ({
       >
         {day.getDate()}
       </DayTable>
-    </div>
+    </DayWrapper>
   );
 };
 
@@ -154,8 +154,43 @@ interface DayTableProps {
 }
 
 const DayTable = styled.div<DayTableProps>`
-  background-color: ${(props) => (props.samemonth ? "white" : "gray")};
-  color: black;
-  height: 36px;
+  color: ${(props) => (props.samemonth ? "black" : "gray")};
+  font-weight: ${(props)=>props.samemonth ? 600:400};
+  height: 40px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 `;
+
+const WeekWrapper = styled.div<{ day: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+
+  & > span {
+    font-size: 16px;
+    font-weight: 700;
+    color: ${(props) =>
+      props.day === "일" ? "red" : props.day === "토" ? "blue" : "black"};
+  }
+`;
+
+const DayWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  &:hover{
+    background-color: #7c8798;
+    border-radius: 100%;
+    
+  }
+`
+
+const CalenderTable = styled.div`
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+`

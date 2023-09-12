@@ -33,7 +33,7 @@ export default function CustomButton(props: Props) {
   return (
     <>
       <Button
-      borderradius={props.borderradius}
+        borderradius={props.borderradius}
         fontWeight={props.fontWeight}
         color={props.color}
         width={props.width}

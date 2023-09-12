@@ -7,8 +7,8 @@ td {
   background-color: white;
   z-index: 9;
   color: black;
-  width: 302px;
-  height: 340px;
+  width: 310px;
+  height: 360px;
   border: 1px solid grey;
   border-radius: 10px;
   padding-left: 10px;
@@ -25,8 +25,9 @@ td {
 }
 
 .Week_Wrapper{
+  display: flex;
   width: 100%;
-  margin-top: 10px;
+  justify-content: space-between;
 }
 
 .current-month {
@@ -53,7 +54,7 @@ td {
 
 .Submit_Button_Wrapper{
   position: fixed;
-  top: 473px;
+  top: 490px;
 }
 
 .Previous_Button{
