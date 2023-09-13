@@ -1,0 +1,67 @@
+.Calendar_Wrapper {
+  background-color: white;
+  z-index: 9;
+  color: black;
+  width: 310px;
+  height: 400px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  opacity: 1;
+}
+
+.Calendar_Header {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Week_Wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.current-month {
+  background-color: #fff;
+  color: #333;
+  height: 40px;
+  cursor: pointer;
+}
+
+.other-month {
+  background-color: #f0f0f0;
+  color: #ccc;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.Submit_Button_Wrapper {
+  position: absolute;
+  top: 525px;
+}
+
+.Previous_Button {
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.Submit_Button_Wrapper > button:hover {
+  background-color: #2e4cdf;
+}
+
+.Submit_Button_Wrapper > button:active {
+  background-color: #5f76e8;
+}

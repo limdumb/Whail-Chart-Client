@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { useState } from "react";
 import ChartTitle from "../../Common/ChartTitle";
 
 const MelonLayoutContainer = styled.div`
@@ -29,11 +28,6 @@ const ChartWrapper = styled.div`
 `;
 
 export default function MelonHot100Chart() {
-  const itemsPerPage = 5;
-  const [pageStartIndex, setPageStartIndex] = useState(0);
-  const [pageEndIndex, setPageEndIndex] = useState(itemsPerPage - 1);
-  const [numPage, setNumPage] = useState(0);
-
   return (
     <MelonLayoutContainer>
       <ChartTitle
@@ -41,20 +35,7 @@ export default function MelonHot100Chart() {
         platform={"Melon Hot 100"}
         date="2022-11-30"
       />
-      <ChartWrapper>
-        {/* <ChartCard
-          setPageStartIndex={setPageStartIndex}
-          setPageEndIndex={setPageEndIndex}
-          used="page"
-          platform={"Melon100"}
-          searchValue={""}
-          numPage={numPage}
-          setNumPage={setNumPage}
-          pageEndIndex={pageEndIndex}
-          pageStartIndex={pageStartIndex}
-          chartType={"daily"}
-        /> */}
-      </ChartWrapper>
+      <ChartWrapper></ChartWrapper>
     </MelonLayoutContainer>
   );
 }
