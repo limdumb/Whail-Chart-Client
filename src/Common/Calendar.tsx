@@ -10,7 +10,6 @@ interface CalendarProps {
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
   clickedDate: Date;
   setClickedDate: React.Dispatch<React.SetStateAction<Date>>;
-  apiRequestFunc: () => {};
 }
 
 const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
