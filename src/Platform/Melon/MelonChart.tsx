@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { useState } from "react";
 import ChartTitle from "../../Common/ChartTitle";
+import { CalendarBox } from "../../Common/CalendarBox";
 
 const MelonLayoutContainer = styled.div`
   margin-left: 260px;
@@ -29,28 +30,19 @@ const ChartWrapper = styled.div`
 `;
 
 export default function MelonChart() {
-  const itemsPerPage = 5;
-  const [pageStartIndex, setPageStartIndex] = useState(0);
-  const [pageEndIndex, setPageEndIndex] = useState(itemsPerPage - 1);
-  const [numPage, setNumPage] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [clickDate, setClickDate] = useState(selectedDate);
 
   return (
     <MelonLayoutContainer>
       <ChartTitle chartType="daily" platform={"Melon"} date="2022-11-30" />
-      <ChartWrapper>
-        {/* <ChartCard
-          setPageStartIndex={setPageStartIndex}
-          setPageEndIndex={setPageEndIndex}
-          used="page"
-          platform={"Melon"}
-          searchValue={""}
-          numPage={numPage}
-          setNumPage={setNumPage}
-          pageEndIndex={pageEndIndex}
-          pageStartIndex={pageStartIndex}
-          chartType={"daily"}
-        /> */}
-      </ChartWrapper>
+      <CalendarBox
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        clickedDate={clickDate}
+        setClickedDate={setClickDate}
+      />
+      <ChartWrapper></ChartWrapper>
     </MelonLayoutContainer>
   );
 }

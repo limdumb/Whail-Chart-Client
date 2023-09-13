@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
+import { CalendarBox } from "../../Common/CalendarBox";
 
 const FloLayoutContainer = styled.div`
   margin-left: 260px;
@@ -29,28 +30,19 @@ const ChartWrapper = styled.div`
 `;
 
 export default function FloChart() {
-  const buttonPerPage = 5;
-  const [pageStartIndex, setPageStartIndex] = useState(0);
-  const [pageEndIndex, setPageEndIndex] = useState(buttonPerPage - 1);
-  const [numPage, setNumPage] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [clickDate, setClickDate] = useState(selectedDate);
 
   return (
     <FloLayoutContainer>
       <ChartTitle chartType="daily" platform={"Flo"} date="2022-11-30" />
-      <ChartWrapper>
-        {/* <ChartCard
-          setPageStartIndex={setPageStartIndex}
-          setPageEndIndex={setPageEndIndex}
-          used="page"
-          platform={"Flo"}
-          searchValue={""}
-          numPage={numPage}
-          setNumPage={setNumPage}
-          pageEndIndex={pageEndIndex}
-          pageStartIndex={pageStartIndex}
-          chartType={"daily"}
-        /> */}
-      </ChartWrapper>
+      <CalendarBox
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        clickedDate={clickDate}
+        setClickedDate={setClickDate}
+      />
+      <ChartWrapper></ChartWrapper>
     </FloLayoutContainer>
   );
 }

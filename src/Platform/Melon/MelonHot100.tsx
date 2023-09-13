@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
 import { CalendarBox } from "../../Common/CalendarBox";
 import { useState } from "react";
-import { transformDate } from "../../Function/transformDate";
 
 const MelonLayoutContainer = styled.div`
   margin-left: 260px;
@@ -31,7 +30,7 @@ const ChartWrapper = styled.div`
 export default function MelonHot100Chart() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [clickDate, setClickDate] = useState(selectedDate);
-    
+
   return (
     <MelonLayoutContainer>
       <ChartTitle

@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
 import { useState } from "react";
+import { CalendarBox } from "../../Common/CalendarBox";
 
 const BugsLayoutContainer = styled.div`
   margin-left: 260px;
@@ -29,28 +30,19 @@ const ChartWrapper = styled.div`
 `;
 
 export default function BugsChart() {
-  const buttonPerPage = 5;
-  const [pageStartIndex, setPageStartIndex] = useState(0);
-  const [pageEndIndex, setPageEndIndex] = useState(buttonPerPage - 1);
-  const [numPage, setNumPage] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [clickDate, setClickDate] = useState(selectedDate);
 
   return (
     <BugsLayoutContainer>
       <ChartTitle chartType="daily" platform={"Bugs"} date="2022-11-30" />
-      <ChartWrapper>
-        {/* <ChartCard
-          setPageStartIndex={setPageStartIndex}
-          setPageEndIndex={setPageEndIndex}
-          used="page"
-          platform={"Bugs"}
-          searchValue={""}
-          numPage={numPage}
-          setNumPage={setNumPage}
-          pageEndIndex={pageEndIndex}
-          pageStartIndex={pageStartIndex}
-          chartType={"daily"}
-        /> */}
-      </ChartWrapper>
+      <CalendarBox
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        clickedDate={clickDate}
+        setClickedDate={setClickDate}
+      />
+      <ChartWrapper></ChartWrapper>
     </BugsLayoutContainer>
   );
 }
