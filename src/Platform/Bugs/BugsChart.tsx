@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
-import { useState } from "react";
 import { CalendarBox } from "../../Common/CalendarBox";
+import { useState } from "react";
 
 const BugsLayoutContainer = styled.div`
   margin-left: 260px;
