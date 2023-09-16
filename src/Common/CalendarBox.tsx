@@ -9,6 +9,7 @@ interface CalendarBoxProps {
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
   clickedDate: Date;
   setClickedDate: React.Dispatch<React.SetStateAction<Date>>;
+  submitFunc: Function
 }
 
 export const CalendarBox = (props: CalendarBoxProps) => {
@@ -20,7 +21,7 @@ export const CalendarBox = (props: CalendarBoxProps) => {
   const calendarClickHandler = () => {
     setActiveCalendar(!activeCalendar);
   };
-
+  
   return (
     <BoxContainer>
       <CustomButton
@@ -38,6 +39,7 @@ export const CalendarBox = (props: CalendarBoxProps) => {
             setSelectedDate={props.setSelectedDate}
             clickedDate={props.clickedDate}
             setClickedDate={props.setClickedDate}
+            submitFunc={props.submitFunc}
           />
         </CalendarContainer>
       ) : null}

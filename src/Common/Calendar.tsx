@@ -10,9 +10,10 @@ interface CalendarProps {
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
   clickedDate: Date;
   setClickedDate: React.Dispatch<React.SetStateAction<Date>>;
+  submitFunc: Function;
 }
 
-const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
+const Calendar = (props: CalendarProps) => {
   const calendarDateArray = calendarDate(props.selectedDate);
   const [nowDate, setNowDate] = useState(props.selectedDate);
 
@@ -101,7 +102,12 @@ const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
             />
           );
         })}
-        <div className="Submit_Button_Wrapper">
+        <div
+          className="Submit_Button_Wrapper"
+          onClick={() => {
+            props.submitFunc(props.clickedDate);
+          }}
+        >
           <CustomButton
             children={"확인"}
             type={"button"}
@@ -111,7 +117,6 @@ const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
             color={"white"}
             fontWeight={600}
             borderradius={"5px"}
-            onClick={() => {}}
           />
         </div>
       </CalenderTable>

@@ -2,6 +2,8 @@ import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
 import { CalendarBox } from "../../Common/CalendarBox";
 import { useState } from "react";
+import { transformDate } from "../../Function/transformDate";
+import { useQuery } from "react-query";
 
 const MelonLayoutContainer = styled.div`
   margin-left: 260px;
@@ -30,6 +32,21 @@ const ChartWrapper = styled.div`
 export default function MelonHot100Chart() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [clickDate, setClickDate] = useState(selectedDate);
+  const transformDateValue = transformDate(new Date());
+  const [submitDate, setSubmitDate] = useState(
+    Number(
+      `${transformDateValue.year}${transformDateValue.month}${transformDateValue.day}`
+    )
+  );
+  const query = useQuery(["genieDaily", submitDate], () => {});
+
+  const changeSubmitDate = (date: Date) => {
+    const resultValue = transformDate(date);
+    const result = Number(
+      `${resultValue.year}${resultValue.month}${resultValue.day}`
+    );
+    setSubmitDate(result);
+  };
 
   return (
     <MelonLayoutContainer>
@@ -43,6 +60,7 @@ export default function MelonHot100Chart() {
         setSelectedDate={setSelectedDate}
         clickedDate={clickDate}
         setClickedDate={setClickDate}
+        submitFunc={changeSubmitDate}
       />
       <ChartWrapper></ChartWrapper>
     </MelonLayoutContainer>
