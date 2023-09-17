@@ -23,9 +23,9 @@ interface NewChartCardProps extends PlatformValueType {
   endPageNumber: number;
   currentPageNumber: number;
   updateTime: string;
-  handlePrevClick: (index: number) => void;
-  handleNextClick: (index: number) => void;
-  index: number;
+  handlePrevClick: (index?: number) => void;
+  handleNextClick: (index?: number) => void;
+  index?: number | undefined;
   chartType: "realTime" | "daily";
 }
 
@@ -108,8 +108,6 @@ export default function NewChartCard(props: NewChartCardProps) {
         <MoveButton
           children={">>"}
           onClick={() => {
-            console.log(props.endPageNumber);
-            console.log(pageButtonArr.length);
             if (props.endPageNumber === pageButtonArr.length)
               props.handleNextClick(props.index);
           }}
@@ -118,17 +116,6 @@ export default function NewChartCard(props: NewChartCardProps) {
     </ChartCardWrapper>
   );
 }
-
-/*
-
-MainChart, ChartCard 에 필요한 데이터를 구성해서 전달한다.
-
-<->
-
-ChartCard Props 만 이용해서, 렌더링만 한다.
-
-
-*/
 
 const ChartCardWrapper = styled.div`
   width: 100%;

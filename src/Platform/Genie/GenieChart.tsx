@@ -4,6 +4,8 @@ import ChartTitle from "../../Common/ChartTitle";
 import { CalendarBox } from "../../Common/CalendarBox";
 import { transformDate } from "../../Function/transformDate";
 import { useQuery } from "react-query";
+import { getDailyChartData } from "../../API/getDailyChartData";
+import NewChartCard from "../../Common/ChartCard/NewChartCard";
 
 const GenieLayoutContainer = styled.div`
   margin-left: 260px;
@@ -30,22 +32,49 @@ const ChartWrapper = styled.div`
     margin-top: 15px;
   }
 `;
-/*
-  1. 내부의 상태값이 많지않고 최대한 심플한 구조를 만들어라
-  2. clickDate를 추적하게 하되, 확인이 눌렸을때 데이터를 호출 할 수 있는 로직을 만들것
-  3. 처음 인입 했을때 데이터 호출 후에는 submit 데이터로 바꾸기
-  4. 컴포넌트의 역할
-*/
 
 export default function GenieChart() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [clickDate, setClickDate] = useState(selectedDate);
   const [submitDate, setSubmitDate] = useState(clickDate);
 
-  const query = useQuery(["genieDaily", transformDate(submitDate)], () => {});
+  const buttonPerPage = 5;
+  const [numPage, setNumPage] = useState(0);
+  const buttonsPerPageValue = 5;
+
+  const [chartCardPageIndex, setChartCardPageIndex] = useState({
+    startIndex: 0,
+    endIndex: 0 + buttonsPerPageValue,
+  });
+
+  const query = useQuery(
+    ["genieDaily", transformDate(submitDate)],
+    async () => {
+      const result = await getDailyChartData({
+        platform: "Genie",
+        date: submitDate,
+      });
+      if (result) return result.data;
+    }
+  );
 
   const changeSubmitDate = () => {
     setSubmitDate(clickDate);
+  };
+
+  const handlePrevClick = () => {
+    const newChartCardPage = chartCardPageIndex;
+    newChartCardPage.startIndex = newChartCardPage.startIndex - buttonPerPage;
+    newChartCardPage.endIndex = newChartCardPage.endIndex - buttonPerPage;
+    setChartCardPageIndex(newChartCardPage);
+  };
+
+  const handleNextClick = () => {
+    const newChartCardPage = chartCardPageIndex;
+    newChartCardPage.startIndex = newChartCardPage.endIndex;
+    newChartCardPage.endIndex = newChartCardPage.endIndex + buttonPerPage;
+
+    setChartCardPageIndex(newChartCardPage);
   };
 
   return (
@@ -58,7 +87,30 @@ export default function GenieChart() {
         setClickedDate={setClickDate}
         submitFunc={changeSubmitDate}
       />
-      <ChartWrapper></ChartWrapper>
+      <ChartWrapper>
+        {query.data ? (
+          <NewChartCard
+            charts={
+              query.data.chart.map((item) => ({
+                id: item.song.id,
+                rank: item.rank,
+                previousRank: item.previous,
+                image: item.song.image,
+                artistName: item.song.artists.name,
+                songName: item.song.name,
+              })) || []
+            }
+            startPageNum={chartCardPageIndex.startIndex}
+            endPageNumber={chartCardPageIndex.endIndex}
+            currentPageNumber={numPage}
+            updateTime={query.data.date}
+            handlePrevClick={handlePrevClick}
+            handleNextClick={handleNextClick}
+            chartType={"daily"}
+            platform={"Genie"}
+          />
+        ) : null}
+      </ChartWrapper>
     </GenieLayoutContainer>
   );
 }

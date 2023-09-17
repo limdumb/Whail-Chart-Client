@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { PlatformValueType } from "../Function/pletformValue";
 import { baseInstance } from "./instance";
+import { transformDate } from "../Function/transformDate";
 
 interface ChartDataResponse<T> {
   platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
@@ -10,7 +11,7 @@ interface ChartDataResponse<T> {
 }
 
 interface DailyChartProps extends PlatformValueType {
-  date: number;
+  date: Date;
 }
 
 interface MelonDailyChartType {
@@ -92,17 +93,15 @@ interface FloDailyChartType {
   };
 }
 
-/* 
-  Platform 별 Response Data Type 정의
-  Platform별 if문 정의 
-  데이터호출
-*/
 export const getDailyChartData = async (props: DailyChartProps) => {
   const params = props.platform.toLowerCase();
+  const dateParams = transformDate(props.date);
+
+  const dateValue = `${dateParams.year}${dateParams.month}${dateParams.day}`;
   if (params === "melon") {
     try {
       const response: AxiosResponse<ChartDataResponse<MelonDailyChartType>> =
-        await baseInstance.get(`/songs/daily/${params}/${props.date}`);
+        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
       return response;
     } catch (err) {
       console.error(err);
@@ -112,7 +111,7 @@ export const getDailyChartData = async (props: DailyChartProps) => {
   if (params === "genie") {
     try {
       const response: AxiosResponse<ChartDataResponse<GenieDailyChartType>> =
-        await baseInstance.get(`/songs/daily/${params}/${props.date}`);
+        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
       return response;
     } catch (err) {
       console.error(err);
@@ -121,7 +120,7 @@ export const getDailyChartData = async (props: DailyChartProps) => {
   if (params === "flo") {
     try {
       const response: AxiosResponse<ChartDataResponse<FloDailyChartType>> =
-        await baseInstance.get(`/songs/daily/${params}/${props.date}`);
+        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
       return response;
     } catch (err) {
       console.error(err);
@@ -130,7 +129,7 @@ export const getDailyChartData = async (props: DailyChartProps) => {
   if (params === "bugs") {
     try {
       const response: AxiosResponse<ChartDataResponse<BugsDailyChartType>> =
-        await baseInstance.get(`/songs/daily/${params}/${props.date}`);
+        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
       return response;
     } catch (err) {
       console.error(err);
@@ -139,7 +138,7 @@ export const getDailyChartData = async (props: DailyChartProps) => {
   if (params === "vibe") {
     try {
       const response: AxiosResponse<ChartDataResponse<VibeDailyChartType>> =
-        await baseInstance.get(`/songs/daily/${params}/${props.date}`);
+        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
       return response;
     } catch (err) {
       console.error(err);

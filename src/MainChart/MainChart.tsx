@@ -30,21 +30,25 @@ export default function MainChart() {
     { startIndex: 0, endIndex: 0 + buttonsPerPageValue },
   ]);
 
-  const handlePrevClick = (index: number) => {
+  const handlePrevClick = (index?: number) => {
     const newChartCardPageIndex = [...chartCardPageIndex];
-    newChartCardPageIndex[index].startIndex =
-      newChartCardPageIndex[index].startIndex - buttonPerPage;
-    newChartCardPageIndex[index].endIndex =
-      newChartCardPageIndex[index].endIndex - buttonPerPage;
+    if (index) {
+      newChartCardPageIndex[index].startIndex =
+        newChartCardPageIndex[index].startIndex - buttonPerPage;
+      newChartCardPageIndex[index].endIndex =
+        newChartCardPageIndex[index].endIndex - buttonPerPage;
+    }
     setChartCardPageIndex(newChartCardPageIndex);
   };
 
-  const handleNextClick = (index: number) => {
+  const handleNextClick = (index?: number) => {
     const newChartCardPageIndex = [...chartCardPageIndex];
-    newChartCardPageIndex[index].startIndex =
-      newChartCardPageIndex[index].endIndex;
-    newChartCardPageIndex[index].endIndex =
-      newChartCardPageIndex[index].endIndex + buttonPerPage;
+    if (index) {
+      newChartCardPageIndex[index].startIndex =
+        newChartCardPageIndex[index].endIndex;
+      newChartCardPageIndex[index].endIndex =
+        newChartCardPageIndex[index].endIndex + buttonPerPage;
+    }
 
     setChartCardPageIndex(newChartCardPageIndex);
   };
