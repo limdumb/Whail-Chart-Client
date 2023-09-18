@@ -12,10 +12,13 @@ interface ButtonPropsType {
 interface Props extends ButtonPropsType {
   children: string;
   type: "button" | "calendar";
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button = styled.button<ButtonPropsType>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   padding: 6px 12px;
   border: 1px solid rgb(95, 118, 232);
@@ -40,12 +43,13 @@ export default function CustomButton(props: Props) {
         width={props.width}
         height={props.height}
         backgroundcolor={props.backgroundcolor}
+        onClick={props.onClick}
       >
         {props.children}
         {props.type === "calendar" ? (
           <AiFillCalendar
-            size={16}
-            style={{ position: "relative", top: 2, left: 4 }}
+            size={17}
+            style={{ position: "relative", top: -0.3, left: 4 }}
           />
         ) : null}
       </Button>

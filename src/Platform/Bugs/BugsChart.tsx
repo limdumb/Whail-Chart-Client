@@ -1,6 +1,9 @@
 import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
+import { CalendarBox } from "../../Common/CalendarBox";
 import { useState } from "react";
+import { transformDate } from "../../Function/transformDate";
+import { useQuery } from "react-query";
 
 const BugsLayoutContainer = styled.div`
   margin-left: 260px;
@@ -29,28 +32,37 @@ const ChartWrapper = styled.div`
 `;
 
 export default function BugsChart() {
-  const buttonPerPage = 5;
-  const [pageStartIndex, setPageStartIndex] = useState(0);
-  const [pageEndIndex, setPageEndIndex] = useState(buttonPerPage - 1);
-  const [numPage, setNumPage] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [clickDate, setClickDate] = useState(selectedDate);
+  const transformDateValue = transformDate(new Date());
+  const [submitDate, setSubmitDate] = useState(
+    Number(
+      `${transformDateValue.year}${transformDateValue.month}${transformDateValue.day}`
+    )
+  );
+
+  const query = useQuery(["genieDaily", submitDate], () => {});
+
+  const changeSubmitDate = (date: Date) => {
+    const resultValue = transformDate(date);
+    const result = Number(
+      `${resultValue.year}${resultValue.month}${resultValue.day}`
+    );
+    setSubmitDate(result);
+  };
 
   return (
     <BugsLayoutContainer>
       <ChartTitle chartType="daily" platform={"Bugs"} date="2022-11-30" />
-      <ChartWrapper>
-        {/* <ChartCard
-          setPageStartIndex={setPageStartIndex}
-          setPageEndIndex={setPageEndIndex}
-          used="page"
-          platform={"Bugs"}
-          searchValue={""}
-          numPage={numPage}
-          setNumPage={setNumPage}
-          pageEndIndex={pageEndIndex}
-          pageStartIndex={pageStartIndex}
-          chartType={"daily"}
-        /> */}
-      </ChartWrapper>
+      <CalendarBox
+        updateTime=""
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        clickedDate={clickDate}
+        setClickedDate={setClickDate}
+        submitFunc={changeSubmitDate}
+      />
+      <ChartWrapper></ChartWrapper>
     </BugsLayoutContainer>
   );
 }

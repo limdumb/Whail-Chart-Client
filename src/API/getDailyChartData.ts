@@ -1,6 +1,8 @@
 import { AxiosResponse } from "axios";
 import { PlatformValueType } from "../Function/pletformValue";
 import { baseInstance } from "./instance";
+import { transformDate } from "../Function/transformDate";
+import dummydata from "./dummydata";
 
 interface ChartDataResponse<T> {
   platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
@@ -10,7 +12,7 @@ interface ChartDataResponse<T> {
 }
 
 interface DailyChartProps extends PlatformValueType {
-  date: number;
+  date: Date;
 }
 
 interface MelonDailyChartType {
@@ -92,42 +94,82 @@ interface FloDailyChartType {
   };
 }
 
-/* 
-  Platform 별 Response Data Type 정의
-  Platform별 if문 정의 
-  데이터호출
-*/
 export const getDailyChartData = async (props: DailyChartProps) => {
   const params = props.platform.toLowerCase();
+<<<<<<< HEAD
+  const dateParams = transformDate(props.date);
+  const test = dummydata()
+
+  const dateValue = `${dateParams.year}${dateParams.month}${dateParams.day}`;
+  if (params === "melon") {
+    try {
+      const response: AxiosResponse<ChartDataResponse<MelonDailyChartType>> =
+        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
+      return response;
+    } catch (err) {
+      console.error(err);
+=======
   try {
     if (params === "melon") {
       const response: AxiosResponse<ChartDataResponse<MelonDailyChartType>> =
         await baseInstance.get(`/songs/daily/${params}/${props.date}`);
       return response.data;
+>>>>>>> 283abc04b9c01f630c8f7e0fc0ff677d350c9a09
     }
 
+<<<<<<< HEAD
+  if (params === "genie") {
+    try {
+      // const response: AxiosResponse<ChartDataResponse<GenieDailyChartType>> =
+      //   await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
+      return test;
+    } catch (err) {
+      console.error(err);
+=======
     if (params === "genie") {
       const response: AxiosResponse<ChartDataResponse<GenieDailyChartType>> =
         await baseInstance.get(`/songs/daily/${params}/${props.date}`);
       return response.data;
+>>>>>>> 283abc04b9c01f630c8f7e0fc0ff677d350c9a09
     }
 
     if (params === "flo") {
       const response: AxiosResponse<ChartDataResponse<FloDailyChartType>> =
+<<<<<<< HEAD
+        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
+      return response;
+    } catch (err) {
+      console.error(err);
+=======
         await baseInstance.get(`/songs/daily/${params}/${props.date}`);
       return response.data;
+>>>>>>> 283abc04b9c01f630c8f7e0fc0ff677d350c9a09
     }
 
     if (params === "bugs") {
       const response: AxiosResponse<ChartDataResponse<BugsDailyChartType>> =
+<<<<<<< HEAD
+        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
+      return response;
+    } catch (err) {
+      console.error(err);
+=======
         await baseInstance.get(`/songs/daily/${params}/${props.date}`);
       return response.data;
+>>>>>>> 283abc04b9c01f630c8f7e0fc0ff677d350c9a09
     }
 
     if (params === "vibe") {
       const response: AxiosResponse<ChartDataResponse<VibeDailyChartType>> =
+<<<<<<< HEAD
+        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
+      return response;
+    } catch (err) {
+      console.error(err);
+=======
         await baseInstance.get(`/songs/daily/${params}/${props.date}`);
       return response.data;
+>>>>>>> 283abc04b9c01f630c8f7e0fc0ff677d350c9a09
     }
 
   } catch (err) {

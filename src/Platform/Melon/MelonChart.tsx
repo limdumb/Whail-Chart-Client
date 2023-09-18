@@ -1,10 +1,16 @@
 import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import ChartTitle from "../../Common/ChartTitle";
+<<<<<<< HEAD
+import { CalendarBox } from "../../Common/CalendarBox";
+import { transformDate } from "../../Function/transformDate";
+import { useQuery } from "react-query";
+=======
 import NewChartCard from "../../Common/ChartCard/NewChartCard";
 import { useQuery } from "react-query";
 import { getDailyChartData } from "../../API/getDailyChartData";
 import { changeDate } from "../../Function/changeDate";
+>>>>>>> 283abc04b9c01f630c8f7e0fc0ff677d350c9a09
 
 const MelonLayoutContainer = styled.div`
   margin-left: 260px;
@@ -33,6 +39,37 @@ const ChartWrapper = styled.div`
 `;
 
 export default function MelonChart() {
+<<<<<<< HEAD
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [clickDate, setClickDate] = useState(selectedDate);
+  const transformDateValue = transformDate(new Date());
+  const [submitDate, setSubmitDate] = useState(
+    Number(
+      `${transformDateValue.year}${transformDateValue.month}${transformDateValue.day}`
+    )
+  );
+  const query = useQuery(["genieDaily", submitDate], () => {});
+
+  const changeSubmitDate = (date: Date) => {
+    const resultValue = transformDate(date);
+    const result = Number(
+      `${resultValue.year}${resultValue.month}${resultValue.day}`
+    );
+    setSubmitDate(result);
+  };
+  return (
+    <MelonLayoutContainer>
+      <ChartTitle chartType="daily" platform={"Melon"} date="2022-11-30" />
+      <CalendarBox
+      updateTime=""
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        clickedDate={clickDate}
+        setClickedDate={setClickDate}
+        submitFunc={changeSubmitDate}
+      />
+      <ChartWrapper></ChartWrapper>
+=======
   const buttonsPerPageValue = 5;
   const [chartCardPageIndex, setChartCardPageIndex] = useState({
     startIndex: 0,
@@ -97,6 +134,7 @@ export default function MelonChart() {
           platform={"Melon"}
         />
       </ChartWrapper>
+>>>>>>> 283abc04b9c01f630c8f7e0fc0ff677d350c9a09
     </MelonLayoutContainer>
   );
 }

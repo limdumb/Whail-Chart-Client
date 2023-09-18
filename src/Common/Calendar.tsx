@@ -4,16 +4,19 @@ import CustomButton from "./Header/CustomButton";
 import { calendarDate } from "../Function/calendarDate";
 import "./css/calendar.css";
 import { useState } from "react";
+import { transformDate } from "../Function/transformDate";
 
 interface CalendarProps {
   selectedDate: Date;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
   clickedDate: Date;
   setClickedDate: React.Dispatch<React.SetStateAction<Date>>;
-  apiRequestFunc: () => {};
+  submitFunc: Function;
+  setCalendarDate: React.Dispatch<React.SetStateAction<string | undefined>>;
+  calendarClickHandler: () => void;
 }
 
-const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
+const Calendar = (props: CalendarProps) => {
   const calendarDateArray = calendarDate(props.selectedDate);
   const [nowDate, setNowDate] = useState(props.selectedDate);
 
@@ -102,7 +105,17 @@ const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
             />
           );
         })}
-        <div className="Submit_Button_Wrapper">
+        <div
+          className="Submit_Button_Wrapper"
+          onClick={() => {
+            const transformDateValue = transformDate(props.clickedDate);
+            props.calendarClickHandler();
+            props.submitFunc(props.clickedDate);
+            props.setCalendarDate(
+              `${transformDateValue.year}-${transformDateValue.month}-${transformDateValue.day}`
+            );
+          }}
+        >
           <CustomButton
             children={"확인"}
             type={"button"}
@@ -112,7 +125,6 @@ const Calendar: React.FC<CalendarProps> = (props: CalendarProps) => {
             color={"white"}
             fontWeight={600}
             borderradius={"5px"}
-            onClick={() => {}}
           />
         </div>
       </CalenderTable>

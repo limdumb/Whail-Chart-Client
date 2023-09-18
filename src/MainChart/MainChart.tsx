@@ -30,21 +30,33 @@ export default function MainChart() {
     { startIndex: 0, endIndex: 0 + buttonsPerPageValue },
   ]);
 
-  const handlePrevClick = (index: number) => {
+  const handlePrevClick = (index?: number) => {
     const newChartCardPageIndex = [...chartCardPageIndex];
-    newChartCardPageIndex[index].startIndex =
-      newChartCardPageIndex[index].startIndex - buttonPerPage;
-    newChartCardPageIndex[index].endIndex =
-      newChartCardPageIndex[index].endIndex - buttonPerPage;
+    if (index) {
+      newChartCardPageIndex[index].startIndex =
+        newChartCardPageIndex[index].startIndex - buttonPerPage;
+      newChartCardPageIndex[index].endIndex =
+        newChartCardPageIndex[index].endIndex - buttonPerPage;
+    }
     setChartCardPageIndex(newChartCardPageIndex);
   };
 
-  const handleNextClick = (index: number) => {
+  const handleNextClick = (index?: number) => {
     const newChartCardPageIndex = [...chartCardPageIndex];
+<<<<<<< HEAD
+    if (index) {
+      newChartCardPageIndex[index].startIndex =
+        newChartCardPageIndex[index].endIndex;
+      newChartCardPageIndex[index].endIndex =
+        newChartCardPageIndex[index].endIndex + buttonPerPage;
+    }
+
+=======
     newChartCardPageIndex[index].startIndex =
       newChartCardPageIndex[index].endIndex;
     newChartCardPageIndex[index].endIndex =
       newChartCardPageIndex[index].endIndex + buttonPerPage;
+>>>>>>> 283abc04b9c01f630c8f7e0fc0ff677d350c9a09
     setChartCardPageIndex(newChartCardPageIndex);
   };
 
