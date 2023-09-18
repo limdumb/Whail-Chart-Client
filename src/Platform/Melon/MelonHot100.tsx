@@ -1,9 +1,11 @@
 import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
 import { CalendarBox } from "../../Common/CalendarBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { transformDate } from "../../Function/transformDate";
 import { useQuery } from "react-query";
+import { getDailyChartData } from "../../API/getDailyChartData";
+import NewChartCard from "../../Common/ChartCard/NewChartCard";
 
 const MelonLayoutContainer = styled.div`
   margin-left: 260px;
@@ -32,21 +34,52 @@ const ChartWrapper = styled.div`
 export default function MelonHot100Chart() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [clickDate, setClickDate] = useState(selectedDate);
-  const transformDateValue = transformDate(new Date());
-  const [submitDate, setSubmitDate] = useState(
-    Number(
-      `${transformDateValue.year}${transformDateValue.month}${transformDateValue.day}`
-    )
-  );
-  const query = useQuery(["genieDaily", submitDate], () => {});
+  const [submitDate, setSubmitDate] = useState(clickDate);
+  const buttonPerPage = 5;
+  const buttonsPerPageValue = 5;
+  const [numPage, setNumPage] = useState(0);
 
-  const changeSubmitDate = (date: Date) => {
-    const resultValue = transformDate(date);
-    const result = Number(
-      `${resultValue.year}${resultValue.month}${resultValue.day}`
-    );
-    setSubmitDate(result);
+  const [chartCardPageIndex, setChartCardPageIndex] = useState({
+    startIndex: 0,
+    endIndex: 0 + buttonsPerPageValue,
+  });
+
+  const query = useQuery(
+    ["melon100Daily", transformDate(submitDate)],
+    async () => {
+      const result = await getDailyChartData({
+        platform: "Melon100",
+        date: submitDate,
+      });
+      if (result) return result.data;
+    }
+  );
+
+  const changeSubmitDate = () => {
+    setSubmitDate(clickDate);
   };
+
+  const handlePrevClick = () => {
+    setChartCardPageIndex((prevState) => ({
+      startIndex: prevState.startIndex - buttonPerPage,
+      endIndex: prevState.endIndex - buttonPerPage,
+    }));
+  };
+
+  const handleNextClick = () => {
+    setChartCardPageIndex((prevState) => ({
+      startIndex: prevState.endIndex,
+      endIndex: prevState.endIndex + buttonPerPage,
+    }));
+  };
+
+  useEffect(() => {
+    if (query.data && query.isFetched) {
+      const newPageNum = Math.ceil(query.data.chart.length / 10);
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      setNumPage(newPageNum);
+    }
+  }, [query, numPage]);
 
   return (
     <MelonLayoutContainer>
@@ -63,7 +96,30 @@ export default function MelonHot100Chart() {
         submitFunc={changeSubmitDate}
         updateTime=""
       />
-      <ChartWrapper></ChartWrapper>
+      <ChartWrapper>
+        {query.data ? (
+          <NewChartCard
+            charts={
+              query.data.chart.map((item) => ({
+                id: item.song.id,
+                rank: item.rank,
+                previousRank: item.previous,
+                image: item.song.image,
+                artistName: item.song.artists.name,
+                songName: item.song.name,
+              })) || []
+            }
+            startPageNum={chartCardPageIndex.startIndex}
+            endPageNumber={chartCardPageIndex.endIndex}
+            currentPageNumber={numPage}
+            updateTime={query.data.date}
+            handlePrevClick={handlePrevClick}
+            handleNextClick={handleNextClick}
+            chartType={"daily"}
+            platform={"Melon100"}
+          />
+        ) : null}
+      </ChartWrapper>
     </MelonLayoutContainer>
   );
 }
