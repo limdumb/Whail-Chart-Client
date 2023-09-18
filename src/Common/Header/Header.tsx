@@ -11,7 +11,7 @@ const HeaderWrapper = styled.div`
   border-bottom: 1px solid rgb(237, 242, 249);
   position: fixed;
   background-color: #f9fbfd;
-  z-index: 10000000;
+  z-index: 100000000000;
   @media screen and (max-width: 390px) {
     width: 390px;
     display: flex;
