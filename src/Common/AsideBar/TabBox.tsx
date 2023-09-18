@@ -6,6 +6,7 @@ import { PlatformValueType } from "../../Function/pletformValue";
 
 interface AsideTabBoxProps extends PlatformValueType {
   navigate: NavigateFunction;
+  toggleAsideBar: () => void;
 }
 
 export const AsideTabWrapper = styled.div`
@@ -25,6 +26,7 @@ export default function AsideTabBox(props: AsideTabBoxProps) {
     <AsideTabWrapper
       onClick={() => {
         props.navigate(`/${props.platform.toLowerCase()}/chart`);
+        props.toggleAsideBar();
       }}
     >
       <img alt="Platform Icon" className="Icon_Image" src={tabIcon} />

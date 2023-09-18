@@ -7,12 +7,18 @@ const IconWrapper = styled.div`
 `;
 
 interface Props {
-  navigate:NavigateFunction
+  navigate: NavigateFunction;
+  toggleAsideBar: () => void;
 }
 
 export default function AllChartBox(props: Props) {
   return (
-    <AsideTabWrapper onClick={()=>{props.navigate("/")}}>
+    <AsideTabWrapper
+      onClick={() => {
+        props.navigate("/");
+        props.toggleAsideBar();
+      }}
+    >
       <IconWrapper>
         <BsFillGridFill color="hsl(218deg 18.75% 68.63%)" size={20} />
       </IconWrapper>

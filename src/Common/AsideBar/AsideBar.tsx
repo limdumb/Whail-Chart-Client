@@ -6,7 +6,7 @@ import ContoureLine from "../ContourLine";
 import "./css/asidebar.css";
 import { useNavigate } from "react-router-dom";
 
-const AsideBarWrapper = styled.aside`
+const AsideBarWrapper = styled.aside<{ isAsideBar: boolean }>`
   width: 260px;
   height: 100%;
   background-color: white;
@@ -18,9 +18,26 @@ const AsideBarWrapper = styled.aside`
   color: rgb(129, 129, 129);
   position: fixed;
   margin-top: 81px;
+  z-index: 999999999;
+  opacity: ${(props) => (props.isAsideBar ? 1 : 1)};
+  transition: visibility 0s, opacity 0.5s;
 
   @media screen and (max-width: 390px) {
-    display: none;
+    visibility: ${(props) => (props.isAsideBar ? "visible" : "hidden")};
+    opacity: ${(props) => (props.isAsideBar ? 1 : 0)};
+  }
+`;
+
+const ModalContainer = styled.div<{ isAsideBar: boolean }>`
+  display: none;
+  @media screen and (max-width: 390px) {
+    display: flex;
+    width: 390px;
+    height: 100vh;
+    background: rgba(55, 55, 55, 0.2);
+    position: absolute;
+    z-index: 999999998;
+    visibility: ${(props) => (props.isAsideBar ? "visible" : "hidden")};
   }
 `;
 
@@ -41,39 +58,51 @@ const ContoureLineWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-export default function AsideBar(): JSX.Element {
+interface AsideBarProps {
+  isAsideOpen: boolean;
+  toggleAsideBar: () => void;
+}
+
+export default function AsideBar(props: AsideBarProps): JSX.Element {
   const pleftformArray = pletformValue();
   const navigate = useNavigate();
 
   return (
-    <AsideBarWrapper>
-      <div className="All_Chart_Box_Conateinr">
-        <LableWrapper>
-          <span>All Chart</span>
-        </LableWrapper>
-        <AllChartBox navigate={navigate} />
-      </div>
-      <ContoureLineWrapper>
-        <ContoureLine
-          color={"rgb(124, 135, 152)"}
-          thickness={1}
-          opacity={0.1}
-        />
-      </ContoureLineWrapper>
-      <div>
-        <LableWrapper>
-          <span>CHARTS</span>
-        </LableWrapper>
-        {pleftformArray.map((el) => {
-          return (
-            <AsideTabBox
-              navigate={navigate}
-              key={el.platform}
-              platform={el.platform}
-            />
-          );
-        })}
-      </div>
-    </AsideBarWrapper>
+    <>
+      <AsideBarWrapper isAsideBar={props.isAsideOpen}>
+        <div className="All_Chart_Box_Conateinr">
+          <LableWrapper>
+            <span>All Chart</span>
+          </LableWrapper>
+          <AllChartBox
+            toggleAsideBar={props.toggleAsideBar}
+            navigate={navigate}
+          />
+        </div>
+        <ContoureLineWrapper>
+          <ContoureLine
+            color={"rgb(124, 135, 152)"}
+            thickness={1}
+            opacity={0.1}
+          />
+        </ContoureLineWrapper>
+        <div>
+          <LableWrapper>
+            <span>CHARTS</span>
+          </LableWrapper>
+          {pleftformArray.map((el) => {
+            return (
+              <AsideTabBox
+                toggleAsideBar={props.toggleAsideBar}
+                navigate={navigate}
+                key={el.platform}
+                platform={el.platform}
+              />
+            );
+          })}
+        </div>
+      </AsideBarWrapper>
+      <ModalContainer isAsideBar={props.isAsideOpen}></ModalContainer>
+    </>
   );
 }
