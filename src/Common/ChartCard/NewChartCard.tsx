@@ -25,8 +25,9 @@ interface NewChartCardProps extends PlatformValueType {
   updateTime: string;
   handlePrevClick: (index: number) => void;
   handleNextClick: (index: number) => void;
-  index: number;
+  index?: number;
   chartType: "realTime" | "daily";
+  used: "all" | "page";
 }
 
 export default function NewChartCard(props: NewChartCardProps) {
@@ -81,7 +82,7 @@ export default function NewChartCard(props: NewChartCardProps) {
               song={el.songName}
               artist={el.artistName}
               previous={el.previousRank}
-              used={"all"}
+              used={props.used}
             />
           );
         })}
@@ -90,7 +91,9 @@ export default function NewChartCard(props: NewChartCardProps) {
         <MoveButton
           children={"<<"}
           onClick={() => {
-            if (pageButtonArr[0] !== 1) props.handlePrevClick(props.index);
+            if (pageButtonArr[0] !== 1) {
+              props.handlePrevClick(props.index ? props.index : 0);
+            }
           }}
         />
         {pageButtonArr.map((el) => {
@@ -108,10 +111,9 @@ export default function NewChartCard(props: NewChartCardProps) {
         <MoveButton
           children={">>"}
           onClick={() => {
-            console.log(props.endPageNumber);
-            console.log(pageButtonArr.length);
-            if (props.endPageNumber === pageButtonArr.length)
-              props.handleNextClick(props.index);
+            if (props.endPageNumber === pageButtonArr.length){
+              props.handleNextClick(props.index ? props.index : 0);
+            }
           }}
         />
       </PageNationWrapper>
