@@ -43,6 +43,7 @@ export default function MainChart() {
 
   const handleNextClick = (index?: number) => {
     const newChartCardPageIndex = [...chartCardPageIndex];
+<<<<<<< HEAD
     if (index) {
       newChartCardPageIndex[index].startIndex =
         newChartCardPageIndex[index].endIndex;
@@ -50,6 +51,12 @@ export default function MainChart() {
         newChartCardPageIndex[index].endIndex + buttonPerPage;
     }
 
+=======
+    newChartCardPageIndex[index].startIndex =
+      newChartCardPageIndex[index].endIndex;
+    newChartCardPageIndex[index].endIndex =
+      newChartCardPageIndex[index].endIndex + buttonPerPage;
+>>>>>>> 283abc04b9c01f630c8f7e0fc0ff677d350c9a09
     setChartCardPageIndex(newChartCardPageIndex);
   };
 
@@ -60,7 +67,6 @@ export default function MainChart() {
       queryFn: async () => {
         const data = await getChartData({
           platform: el.platform,
-          chartType: "realTime",
         });
         return data;
       },
@@ -78,7 +84,8 @@ export default function MainChart() {
         setNumPage(newNumPageArr);
       }
     });
-  }, [chartDataResponse, numPage]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chartDataResponse]);
 
   const updateTime = chartDataResponse.map((query) => {
     const transformDate = changeDate(query.data?.date, query.data?.hour);
@@ -93,6 +100,7 @@ export default function MainChart() {
           return (
             <div className="Main_Chart_Wrapper" key={index}>
               <NewChartCard
+                used="all"
                 index={index}
                 chartType="realTime"
                 handleNextClick={handleNextClick}

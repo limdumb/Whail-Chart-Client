@@ -90,7 +90,9 @@ export default function NewChartCard(props: NewChartCardProps) {
         <MoveButton
           children={"<<"}
           onClick={() => {
-            if (pageButtonArr[0] !== 1) props.handlePrevClick(props.index);
+            if (pageButtonArr[0] !== 1) {
+              props.handlePrevClick(props.index ? props.index : 0);
+            }
           }}
         />
         {pageButtonArr.map((el) => {
