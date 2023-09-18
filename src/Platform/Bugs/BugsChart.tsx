@@ -55,6 +55,7 @@ export default function BugsChart() {
     <BugsLayoutContainer>
       <ChartTitle chartType="daily" platform={"Bugs"} date="2022-11-30" />
       <CalendarBox
+        updateTime=""
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
         clickedDate={clickDate}

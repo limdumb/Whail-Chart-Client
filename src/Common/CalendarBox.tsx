@@ -1,32 +1,31 @@
 import { styled } from "styled-components";
 import CustomButton from "./Header/CustomButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "./Calendar";
-import { transformDate } from "../Function/transformDate";
 
 interface CalendarBoxProps {
   selectedDate: Date;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
   clickedDate: Date;
   setClickedDate: React.Dispatch<React.SetStateAction<Date>>;
-  submitFunc: Function
+  submitFunc: Function;
+  updateTime: string | undefined;
 }
 
 export const CalendarBox = (props: CalendarBoxProps) => {
   const [activeCalendar, setActiveCalendar] = useState(false);
-  const [calendarDate, setCalendarDate] = useState(
-    transformDate(props.selectedDate)
-  );
+  const [calendarDate, setCalendarDate] = useState(props.updateTime);
+  useEffect(() => {}, [props.updateTime]);
 
   const calendarClickHandler = () => {
     setActiveCalendar(!activeCalendar);
   };
-  
+
   return (
     <BoxContainer>
       <CustomButton
         fontWeight={600}
-        children={`${calendarDate.year}.${calendarDate.month}.${calendarDate.day}`}
+        children={calendarDate ? calendarDate : ""}
         type={"calendar"}
         width={"160px"}
         height={"35px"}
@@ -35,11 +34,13 @@ export const CalendarBox = (props: CalendarBoxProps) => {
       {activeCalendar ? (
         <CalendarContainer>
           <Calendar
+            setCalendarDate={setCalendarDate}
             selectedDate={props.selectedDate}
             setSelectedDate={props.setSelectedDate}
             clickedDate={props.clickedDate}
             setClickedDate={props.setClickedDate}
             submitFunc={props.submitFunc}
+            calendarClickHandler={calendarClickHandler}
           />
         </CalendarContainer>
       ) : null}
@@ -78,4 +79,5 @@ const BoxContainer = styled.div`
 const CalendarContainer = styled.div`
   position: absolute;
   top: 252px;
+  z-index: 10000000;
 `;

@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import { PlatformValueType } from "../Function/pletformValue";
 import { baseInstance } from "./instance";
 import { transformDate } from "../Function/transformDate";
+import dummydata from "./dummydata";
 
 interface ChartDataResponse<T> {
   platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";
@@ -96,6 +97,7 @@ interface FloDailyChartType {
 export const getDailyChartData = async (props: DailyChartProps) => {
   const params = props.platform.toLowerCase();
   const dateParams = transformDate(props.date);
+  const test = dummydata()
 
   const dateValue = `${dateParams.year}${dateParams.month}${dateParams.day}`;
   if (params === "melon") {
@@ -110,9 +112,9 @@ export const getDailyChartData = async (props: DailyChartProps) => {
 
   if (params === "genie") {
     try {
-      const response: AxiosResponse<ChartDataResponse<GenieDailyChartType>> =
-        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
-      return response;
+      // const response: AxiosResponse<ChartDataResponse<GenieDailyChartType>> =
+      //   await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
+      return test;
     } catch (err) {
       console.error(err);
     }

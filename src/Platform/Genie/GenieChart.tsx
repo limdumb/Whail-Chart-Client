@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
 import { CalendarBox } from "../../Common/CalendarBox";
@@ -27,6 +27,7 @@ const GenieLayoutContainer = styled.div`
 `;
 
 const ChartWrapper = styled.div`
+  width: 100%;
   padding: 0px 15px;
   @media screen and (max-width: 390px) {
     margin-top: 15px;
@@ -37,10 +38,9 @@ export default function GenieChart() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [clickDate, setClickDate] = useState(selectedDate);
   const [submitDate, setSubmitDate] = useState(clickDate);
-
   const buttonPerPage = 5;
-  const [numPage, setNumPage] = useState(0);
   const buttonsPerPageValue = 5;
+  const [numPage, setNumPage] = useState(0);
 
   const [chartCardPageIndex, setChartCardPageIndex] = useState({
     startIndex: 0,
@@ -63,24 +63,32 @@ export default function GenieChart() {
   };
 
   const handlePrevClick = () => {
-    const newChartCardPage = chartCardPageIndex;
-    newChartCardPage.startIndex = newChartCardPage.startIndex - buttonPerPage;
-    newChartCardPage.endIndex = newChartCardPage.endIndex - buttonPerPage;
-    setChartCardPageIndex(newChartCardPage);
+    setChartCardPageIndex((prevState) => ({
+      startIndex: prevState.startIndex - buttonPerPage,
+      endIndex: prevState.endIndex - buttonPerPage,
+    }));
   };
 
   const handleNextClick = () => {
-    const newChartCardPage = chartCardPageIndex;
-    newChartCardPage.startIndex = newChartCardPage.endIndex;
-    newChartCardPage.endIndex = newChartCardPage.endIndex + buttonPerPage;
-
-    setChartCardPageIndex(newChartCardPage);
+    setChartCardPageIndex((prevState) => ({
+      startIndex: prevState.endIndex,
+      endIndex: prevState.endIndex + buttonPerPage,
+    }));
   };
+
+  useEffect(() => {
+    if (query.data && query.isFetched) {
+      const newPageNum = Math.ceil(query.data.chart.length / 10);
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      setNumPage(newPageNum);
+    }
+  }, [query, numPage]);
 
   return (
     <GenieLayoutContainer>
       <ChartTitle chartType="daily" platform={"Genie"} date="2022-11-30" />
       <CalendarBox
+        updateTime={query.data?.date}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
         clickedDate={clickDate}

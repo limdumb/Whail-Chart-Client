@@ -81,7 +81,7 @@ export default function NewChartCard(props: NewChartCardProps) {
               song={el.songName}
               artist={el.artistName}
               previous={el.previousRank}
-              used={"all"}
+              used={props.chartType === "daily" ? "page" : "all"}
             />
           );
         })}

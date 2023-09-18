@@ -53,6 +53,7 @@ export default function MelonChart() {
     <MelonLayoutContainer>
       <ChartTitle chartType="daily" platform={"Melon"} date="2022-11-30" />
       <CalendarBox
+      updateTime=""
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
         clickedDate={clickDate}

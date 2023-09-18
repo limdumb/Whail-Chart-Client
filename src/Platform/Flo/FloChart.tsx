@@ -55,6 +55,7 @@ export default function FloChart() {
     <FloLayoutContainer>
       <ChartTitle chartType="daily" platform={"Flo"} date="2022-11-30" />
       <CalendarBox
+      updateTime=""
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
         clickedDate={clickDate}

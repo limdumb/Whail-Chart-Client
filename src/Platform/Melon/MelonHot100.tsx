@@ -61,6 +61,7 @@ export default function MelonHot100Chart() {
         clickedDate={clickDate}
         setClickedDate={setClickDate}
         submitFunc={changeSubmitDate}
+        updateTime=""
       />
       <ChartWrapper></ChartWrapper>
     </MelonLayoutContainer>
