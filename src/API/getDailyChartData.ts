@@ -2,7 +2,6 @@ import { AxiosResponse } from "axios";
 import { PlatformValueType } from "../Function/pletformValue";
 import { baseInstance } from "./instance";
 import { transformDate } from "../Function/transformDate";
-import dummydata from "./dummydata";
 
 interface ChartDataResponse<T> {
   platform: "Melon" | "Genie" | "Flo" | "Bugs" | "Vibe";

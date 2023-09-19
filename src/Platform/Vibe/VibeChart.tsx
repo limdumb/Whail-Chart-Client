@@ -6,6 +6,7 @@ import { getDailyChartData } from "../../API/getDailyChartData";
 import { useQuery } from "react-query";
 import NewChartCard from "../../Common/ChartCard/NewChartCard";
 import { CalendarBox } from "../../Common/CalendarBox";
+import Spinner from "../../Common/Spinner";
 
 const VibeLayoutContainer = styled.div`
   margin-left: 260px;
@@ -92,28 +93,34 @@ export default function VibeChart() {
         submitFunc={changeSubmitDate}
       />
       <ChartWrapper>
-        {query.data ? (
-          <NewChartCard
-            charts={
-              query.data.chart.map((item) => ({
-                id: item.song.id,
-                rank: item.rank,
-                previousRank: item.previous,
-                image: item.song.image,
-                artistName: item.song.artists.name,
-                songName: item.song.name,
-              })) || []
-            }
-            startPageNum={chartCardPageIndex.startIndex}
-            endPageNumber={chartCardPageIndex.endIndex}
-            currentPageNumber={numPage}
-            updateTime={query.data.date}
-            handlePrevClick={handlePrevClick}
-            handleNextClick={handleNextClick}
-            chartType={"daily"}
-            platform={"Vibe"}
-          />
-        ) : null}
+        {query.isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            {query.data ? (
+              <NewChartCard
+                charts={
+                  query.data.chart.map((item) => ({
+                    id: item.song.id,
+                    rank: item.rank,
+                    previousRank: item.previous,
+                    image: item.song.image,
+                    artistName: item.song.artists.name,
+                    songName: item.song.name,
+                  })) || []
+                }
+                startPageNum={chartCardPageIndex.startIndex}
+                endPageNumber={chartCardPageIndex.endIndex}
+                currentPageNumber={numPage}
+                updateTime={query.data.date}
+                handlePrevClick={handlePrevClick}
+                handleNextClick={handleNextClick}
+                chartType={"daily"}
+                platform={"Vibe"}
+              />
+            ) : null}
+          </>
+        )}
       </ChartWrapper>
     </VibeLayoutContainer>
   );
