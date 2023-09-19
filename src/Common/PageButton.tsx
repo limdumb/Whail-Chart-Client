@@ -13,6 +13,8 @@ interface PageCountButtonProps {
 
 const PageCountButton = styled.button<PageCountButtonProps>`
   display: block;
+  width: 40px;
+  height: 34.66px;
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;

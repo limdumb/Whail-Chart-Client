@@ -97,7 +97,6 @@ interface FloDailyChartType {
 export const getDailyChartData = async (props: DailyChartProps) => {
   const params = props.platform.toLowerCase();
   const dateParams = transformDate(props.date);
-  const test = dummydata()
 
   const dateValue = `${dateParams.year}${dateParams.month}${dateParams.day}`;
   if (params === "melon") {
@@ -112,9 +111,9 @@ export const getDailyChartData = async (props: DailyChartProps) => {
 
   if (params === "genie") {
     try {
-      // const response: AxiosResponse<ChartDataResponse<GenieDailyChartType>> =
-      //   await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
-      return test;
+      const response: AxiosResponse<ChartDataResponse<GenieDailyChartType>> =
+        await baseInstance.get(`/songs/daily/${params}/${dateValue}`);
+      return response;
     } catch (err) {
       console.error(err);
     }

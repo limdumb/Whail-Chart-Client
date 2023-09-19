@@ -81,7 +81,11 @@ export default function NewChartCard(props: NewChartCardProps) {
               song={el.songName}
               artist={el.artistName}
               previous={el.previousRank}
-              used={props.chartType === "daily" && window.innerWidth !== 390 ? "page" : "all"}
+              used={
+                props.chartType === "daily" && window.innerWidth !== 390
+                  ? "page"
+                  : "all"
+              }
             />
           );
         })}
@@ -110,7 +114,7 @@ export default function NewChartCard(props: NewChartCardProps) {
         <MoveButton
           children={">>"}
           onClick={() => {
-            if (props.endPageNumber === pageButtonArr.length)
+            if (props.endPageNumber !== props.currentPageNumber)
               props.handleNextClick(props.index);
           }}
         />
@@ -141,6 +145,7 @@ const RankingChartWrapper = styled.div`
 
 const PageNationWrapper = styled.div`
   height: 42px;
+  width: 279px;
   margin-top: 5px;
   display: flex;
   justify-content: center;
