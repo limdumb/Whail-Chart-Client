@@ -1,5 +1,6 @@
 import { CustomSpan } from "./CustomSpan";
-import "./ChartCard/css/chartTitle.css"
+import "./ChartCard/css/chartTitle.css";
+import { transformDate } from "../Function/transformDate";
 
 interface ChartTitleProps {
   chartType: "daily" | "realTime";
@@ -8,6 +9,8 @@ interface ChartTitleProps {
 }
 
 export default function ChartTitle(props: ChartTitleProps) {
+  const defaultDateVaule = transformDate(new Date());
+
   return (
     <div className="Chart_Intro_Container">
       <div className="Title_Container">
@@ -55,7 +58,11 @@ export default function ChartTitle(props: ChartTitleProps) {
               marginright={8}
             />
             <CustomSpan
-              children={props.date ? props.date : "0000-00-00"}
+              children={
+                props.date
+                  ? props.date
+                  : `${defaultDateVaule.year}-${defaultDateVaule.month}-${defaultDateVaule.day}`
+              }
               fontSize={13}
               color="#9eabc0"
             />
