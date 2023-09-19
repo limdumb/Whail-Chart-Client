@@ -29,7 +29,6 @@ const MelonLayoutContainer = styled.div`
 
 const ChartWrapper = styled.div`
   padding: 0px 15px;
-  margin-top: 15px;
 `;
 
 export default function MelonHot100Chart() {
@@ -87,7 +86,7 @@ export default function MelonHot100Chart() {
       <ChartTitle
         chartType="daily"
         platform={"Melon Hot 100"}
-        date="2022-11-30"
+        date={query.data ? `${query.data?.date}` : ""}
       />
       <CalendarBox
         selectedDate={selectedDate}
@@ -123,7 +122,21 @@ export default function MelonHot100Chart() {
                 chartType={"daily"}
                 platform={"Melon100"}
               />
-            ) : null}
+            ) : (
+              <>
+                <NewChartCard
+                  charts={[]}
+                  startPageNum={chartCardPageIndex.startIndex}
+                  endPageNumber={chartCardPageIndex.endIndex}
+                  currentPageNumber={numPage}
+                  updateTime={""}
+                  handlePrevClick={handlePrevClick}
+                  handleNextClick={handleNextClick}
+                  chartType={"daily"}
+                  platform={"Melon100"}
+                />
+              </>
+            )}
           </>
         )}
       </ChartWrapper>

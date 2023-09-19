@@ -83,7 +83,7 @@ export default function FloChart() {
 
   return (
     <FloLayoutContainer>
-      <ChartTitle chartType="daily" platform={"Flo"} date="2022-11-30" />
+      <ChartTitle chartType="daily" platform={"Flo"} date={query.data ? `${query.data?.date}` : ""} />
       <CalendarBox
         updateTime=""
         selectedDate={selectedDate}
@@ -118,7 +118,21 @@ export default function FloChart() {
                 chartType={"daily"}
                 platform={"Flo"}
               />
-            ) : null}
+            ) : (
+              <>
+                <NewChartCard
+                  charts={[]}
+                  startPageNum={chartCardPageIndex.startIndex}
+                  endPageNumber={chartCardPageIndex.endIndex}
+                  currentPageNumber={numPage}
+                  updateTime={""}
+                  handlePrevClick={handlePrevClick}
+                  handleNextClick={handleNextClick}
+                  chartType={"daily"}
+                  platform={"Flo"}
+                />
+              </>
+            )}
           </>
         )}
       </ChartWrapper>

@@ -83,7 +83,11 @@ export default function VibeChart() {
 
   return (
     <VibeLayoutContainer>
-      <ChartTitle chartType="daily" platform={"Vibe"} date="2022-11-30" />
+      <ChartTitle
+        chartType="daily"
+        platform={"Vibe"}
+        date={query.data ? `${query.data?.date}` : ""}
+      />
       <CalendarBox
         updateTime={query.data?.date}
         selectedDate={selectedDate}
@@ -118,7 +122,21 @@ export default function VibeChart() {
                 chartType={"daily"}
                 platform={"Vibe"}
               />
-            ) : null}
+            ) : (
+              <>
+                <NewChartCard
+                  charts={[]}
+                  startPageNum={chartCardPageIndex.startIndex}
+                  endPageNumber={chartCardPageIndex.endIndex}
+                  currentPageNumber={numPage}
+                  updateTime={""}
+                  handlePrevClick={handlePrevClick}
+                  handleNextClick={handleNextClick}
+                  chartType={"daily"}
+                  platform={"Vibe"}
+                />
+              </>
+            )}
           </>
         )}
       </ChartWrapper>

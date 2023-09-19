@@ -83,7 +83,7 @@ export default function BugsChart() {
 
   return (
     <BugsLayoutContainer>
-      <ChartTitle chartType="daily" platform={"Bugs"} date="2022-11-30" />
+      <ChartTitle chartType="daily" platform={"Bugs"} date={query.data ? `${query.data?.date}` : ""}/>
       <CalendarBox
         updateTime=""
         selectedDate={selectedDate}
@@ -118,7 +118,21 @@ export default function BugsChart() {
                 chartType={"daily"}
                 platform={"Bugs"}
               />
-            ) : null}
+            ) : (
+              <>
+                <NewChartCard
+                  charts={[]}
+                  startPageNum={chartCardPageIndex.startIndex}
+                  endPageNumber={chartCardPageIndex.endIndex}
+                  currentPageNumber={numPage}
+                  updateTime={""}
+                  handlePrevClick={handlePrevClick}
+                  handleNextClick={handleNextClick}
+                  chartType={"daily"}
+                  platform={"Bugs"}
+                />
+              </>
+            )}
           </>
         )}
       </ChartWrapper>

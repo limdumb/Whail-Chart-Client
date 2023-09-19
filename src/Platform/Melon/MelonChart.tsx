@@ -85,7 +85,7 @@ export default function MelonChart() {
   }, [query, numPage]);
   return (
     <MelonLayoutContainer>
-      <ChartTitle chartType="daily" platform={"Melon"} date="2022-11-30" />
+      <ChartTitle chartType="daily" platform={"Melon"} date={query.data ? `${query.data?.date}` : ""} />
       <CalendarBox
         updateTime=""
         selectedDate={selectedDate}
@@ -120,7 +120,21 @@ export default function MelonChart() {
                 chartType={"daily"}
                 platform={"Melon"}
               />
-            ) : null}
+            ) : (
+              <>
+                <NewChartCard
+                  charts={[]}
+                  startPageNum={chartCardPageIndex.startIndex}
+                  endPageNumber={chartCardPageIndex.endIndex}
+                  currentPageNumber={numPage}
+                  updateTime={""}
+                  handlePrevClick={handlePrevClick}
+                  handleNextClick={handleNextClick}
+                  chartType={"daily"}
+                  platform={"Melon"}
+                />
+              </>
+            )}
           </>
         )}
       </ChartWrapper>

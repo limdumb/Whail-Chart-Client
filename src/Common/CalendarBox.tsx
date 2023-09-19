@@ -56,6 +56,7 @@ const BoxContainer = styled.div`
   box-shadow: 2px 2px 5px 1px rgba(233, 236, 239);
   opacity: 1;
   margin-left: 15px;
+  margin-bottom: 15px;
 
   display: flex;
   justify-content: center;
