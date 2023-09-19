@@ -6,6 +6,7 @@ import { transformDate } from "../../Function/transformDate";
 import { useQuery } from "react-query";
 import { getDailyChartData } from "../../API/getDailyChartData";
 import NewChartCard from "../../Common/ChartCard/NewChartCard";
+import Spinner from "../../Common/Spinner";
 
 const BugsLayoutContainer = styled.div`
   margin-left: 260px;
@@ -92,28 +93,34 @@ export default function BugsChart() {
         submitFunc={changeSubmitDate}
       />
       <ChartWrapper>
-        {query.data ? (
-          <NewChartCard
-            charts={
-              query.data.chart.map((item) => ({
-                id: item.song.id,
-                rank: item.rank,
-                previousRank: item.previous,
-                image: item.song.image,
-                artistName: item.song.artists.name,
-                songName: item.song.name,
-              })) || []
-            }
-            startPageNum={chartCardPageIndex.startIndex}
-            endPageNumber={chartCardPageIndex.endIndex}
-            currentPageNumber={numPage}
-            updateTime={query.data.date}
-            handlePrevClick={handlePrevClick}
-            handleNextClick={handleNextClick}
-            chartType={"daily"}
-            platform={"Bugs"}
-          />
-        ) : null}
+        {query.isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            {query.data ? (
+              <NewChartCard
+                charts={
+                  query.data.chart.map((item) => ({
+                    id: item.song.id,
+                    rank: item.rank,
+                    previousRank: item.previous,
+                    image: item.song.image,
+                    artistName: item.song.artists.name,
+                    songName: item.song.name,
+                  })) || []
+                }
+                startPageNum={chartCardPageIndex.startIndex}
+                endPageNumber={chartCardPageIndex.endIndex}
+                currentPageNumber={numPage}
+                updateTime={query.data.date}
+                handlePrevClick={handlePrevClick}
+                handleNextClick={handleNextClick}
+                chartType={"daily"}
+                platform={"Bugs"}
+              />
+            ) : null}
+          </>
+        )}
       </ChartWrapper>
     </BugsLayoutContainer>
   );
