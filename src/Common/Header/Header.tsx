@@ -47,15 +47,23 @@ const MenuIconWrapper = styled.div`
   }
 `;
 
-export default function Header() {
+interface HeaderProps {
+  toggleAsideBar: () => void;
+}
+
+export default function Header(props: HeaderProps) {
   const navigate = useNavigate();
 
   return (
     <HeaderWrapper>
       <MenuIconWrapper>
-        <AiOutlineMenu size={16} fontWeight={600} />
+        <AiOutlineMenu
+          size={16}
+          fontWeight={600}
+          onClick={() => props.toggleAsideBar()}
+        />
       </MenuIconWrapper>
-      <LogoWrapper onClick={() => navigate("/")}>
+      <LogoWrapper style={{ cursor: "pointer" }} onClick={() => navigate("/")}>
         <LogoImg src="이미지" />
       </LogoWrapper>
       <MenuIconWrapper>
