@@ -87,7 +87,11 @@ export default function GenieChart() {
 
   return (
     <GenieLayoutContainer>
-      <ChartTitle chartType="daily" platform={"Genie"} date="2022-11-30" />
+      <ChartTitle
+        chartType="daily"
+        platform={"Genie"}
+        date={query.data ? `${query.data?.date}` : ""}
+      />
       <CalendarBox
         updateTime={query.data?.date}
         selectedDate={selectedDate}
@@ -122,7 +126,19 @@ export default function GenieChart() {
                 chartType={"daily"}
                 platform={"Genie"}
               />
-            ) : null}
+            ) : (
+              <NewChartCard
+                charts={[]}
+                startPageNum={chartCardPageIndex.startIndex}
+                endPageNumber={chartCardPageIndex.endIndex}
+                currentPageNumber={numPage}
+                updateTime={""}
+                handlePrevClick={handlePrevClick}
+                handleNextClick={handleNextClick}
+                chartType={"daily"}
+                platform={"Genie"}
+              />
+            )}
           </>
         )}
       </ChartWrapper>

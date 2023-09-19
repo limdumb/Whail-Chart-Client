@@ -9,6 +9,7 @@ import RankCard from "./RankCard";
 import { useState } from "react";
 import { itemPerPage } from "../../Function/itemPerPage";
 import { PageButton } from "../PageButton";
+import { NoResult } from "../NoResult";
 
 interface NewChartCardProps extends PlatformValueType {
   charts: {
@@ -30,13 +31,13 @@ interface NewChartCardProps extends PlatformValueType {
 }
 
 export default function NewChartCard(props: NewChartCardProps) {
+  const [pageActiveIndex, setPageActiveIndex] = useState(0);
   const itemsPerPageValue = itemPerPage();
   const pageButtonArr = Array(props.currentPageNumber)
     .fill(0)
     .map((_, i) => i + 1)
     .slice(props.startPageNum, props.endPageNumber);
 
-  const [pageActiveIndex, setPageActiveIndex] = useState(0);
   const startIndex = pageActiveIndex * itemsPerPageValue;
   const endIndex = startIndex + itemsPerPageValue;
   const currentData = props.charts.slice(startIndex, endIndex);
@@ -72,23 +73,29 @@ export default function NewChartCard(props: NewChartCardProps) {
       </div>
       <ContoureLine color={"rgb(124, 135, 152)"} thickness={1} opacity={0.1} />
       <RankingChartWrapper>
-        {currentData.map((el, index) => {
-          return (
-            <RankCard
-              key={index}
-              rank={el.rank}
-              image={el.image}
-              song={el.songName}
-              artist={el.artistName}
-              previous={el.previousRank}
-              used={
-                props.chartType === "daily" && window.innerWidth !== 390
-                  ? "page"
-                  : "all"
-              }
-            />
-          );
-        })}
+        {currentData.length === 0 ? (
+          <NoResult />
+        ) : (
+          <>
+            {currentData.map((el, index) => {
+              return (
+                <RankCard
+                  key={index}
+                  rank={el.rank}
+                  image={el.image}
+                  song={el.songName}
+                  artist={el.artistName}
+                  previous={el.previousRank}
+                  used={
+                    props.chartType === "daily" && window.innerWidth !== 390
+                      ? "page"
+                      : "all"
+                  }
+                />
+              );
+            })}
+          </>
+        )}
       </RankingChartWrapper>
       <PageNationWrapper>
         <MoveButton
@@ -145,7 +152,8 @@ const RankingChartWrapper = styled.div`
 
 const PageNationWrapper = styled.div`
   height: 42px;
-  width: 279px;
+  width: 100%;
+  padding: 0px, 5px;
   margin-top: 5px;
   display: flex;
   justify-content: center;
