@@ -1,6 +1,11 @@
-import { SetStateAction, useState } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import ChartTitle from "../../Common/ChartTitle";
+import { transformDate } from "../../Function/transformDate";
+import { getDailyChartData } from "../../API/getDailyChartData";
+import { useQuery } from "react-query";
+import NewChartCard from "../../Common/ChartCard/NewChartCard";
+import { CalendarBox } from "../../Common/CalendarBox";
 
 const VibeLayoutContainer = styled.div`
   margin-left: 260px;
@@ -29,27 +34,86 @@ const ChartWrapper = styled.div`
 `;
 
 export default function VibeChart() {
-  const itemsPerPage = 5;
-  const [pageStartIndex, setPageStartIndex] = useState(0);
-  const [pageEndIndex, setPageEndIndex] = useState(itemsPerPage - 1);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [clickDate, setClickDate] = useState(selectedDate);
+  const [submitDate, setSubmitDate] = useState(clickDate);
+  const buttonPerPage = 5;
+  const buttonsPerPageValue = 5;
   const [numPage, setNumPage] = useState(0);
+
+  const [chartCardPageIndex, setChartCardPageIndex] = useState({
+    startIndex: 0,
+    endIndex: 0 + buttonsPerPageValue,
+  });
+
+  const query = useQuery(["vibeDaily", transformDate(submitDate)], async () => {
+    const result = await getDailyChartData({
+      platform: "Vibe",
+      date: submitDate,
+    });
+    if (result) return result.data;
+  });
+
+  const changeSubmitDate = () => {
+    setSubmitDate(clickDate);
+  };
+
+  const handlePrevClick = () => {
+    setChartCardPageIndex((prevState) => ({
+      startIndex: prevState.startIndex - buttonPerPage,
+      endIndex: prevState.endIndex - buttonPerPage,
+    }));
+  };
+
+  const handleNextClick = () => {
+    setChartCardPageIndex((prevState) => ({
+      startIndex: prevState.endIndex,
+      endIndex: prevState.endIndex + buttonPerPage,
+    }));
+  };
+
+  useEffect(() => {
+    if (query.data && query.isFetched) {
+      const newPageNum = Math.ceil(query.data.chart.length / 10);
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      setNumPage(newPageNum);
+    }
+  }, [query, numPage]);
 
   return (
     <VibeLayoutContainer>
       <ChartTitle chartType="daily" platform={"Vibe"} date="2022-11-30" />
+      <CalendarBox
+        updateTime={query.data?.date}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        clickedDate={clickDate}
+        setClickedDate={setClickDate}
+        submitFunc={changeSubmitDate}
+      />
       <ChartWrapper>
-        {/* <ChartCard
-          used="page"
-          platform={"Vibe"}
-          searchValue={""}
-          numPage={numPage}
-          setNumPage={setNumPage}
-          pageEndIndex={pageEndIndex}
-          pageStartIndex={pageStartIndex}
-          chartType={"daily"}
-          setPageStartIndex={setPageStartIndex}
-          setPageEndIndex={setPageEndIndex}
-        /> */}
+        {query.data ? (
+          <NewChartCard
+            charts={
+              query.data.chart.map((item) => ({
+                id: item.song.id,
+                rank: item.rank,
+                previousRank: item.previous,
+                image: item.song.image,
+                artistName: item.song.artists.name,
+                songName: item.song.name,
+              })) || []
+            }
+            startPageNum={chartCardPageIndex.startIndex}
+            endPageNumber={chartCardPageIndex.endIndex}
+            currentPageNumber={numPage}
+            updateTime={query.data.date}
+            handlePrevClick={handlePrevClick}
+            handleNextClick={handleNextClick}
+            chartType={"daily"}
+            platform={"Vibe"}
+          />
+        ) : null}
       </ChartWrapper>
     </VibeLayoutContainer>
   );

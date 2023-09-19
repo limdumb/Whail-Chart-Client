@@ -102,7 +102,10 @@ export default function AsideBar(props: AsideBarProps): JSX.Element {
           })}
         </div>
       </AsideBarWrapper>
-      <ModalContainer isAsideBar={props.isAsideOpen}></ModalContainer>
+      <ModalContainer
+        onClick={() => props.toggleAsideBar()}
+        isAsideBar={props.isAsideOpen}
+      />
     </>
   );
 }
